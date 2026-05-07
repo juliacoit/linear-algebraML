@@ -1,6 +1,4 @@
-# CLAUDE.md
-
-## Projeto: Álgebra Linear Aplicada ao Machine Learning
+# Álgebra Linear Aplicada ao Machine Learning
 
 ### Disciplina
 
