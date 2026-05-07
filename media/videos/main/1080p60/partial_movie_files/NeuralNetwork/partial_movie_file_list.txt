@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/NeuralNetwork/2257293077_2873087806_223132457.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/NeuralNetwork/2135761390_3429875279_2659769773.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/NeuralNetwork/2135761390_386709646_1669324267.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/NeuralNetwork/2135761390_3452024070_2416975896.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/NeuralNetwork/2135761390_2844360058_122726965.mp4'

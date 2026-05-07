@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/ImageToMatrix/2257293077_591326033_223132457.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/ImageToMatrix/2135761390_2470415991_1977216010.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/ImageToMatrix/2135761390_4217992463_1332432494.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/ImageToMatrix/2135761390_947727700_2660237412.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/ImageToMatrix/2135761390_2844360058_2846616886.mp4'

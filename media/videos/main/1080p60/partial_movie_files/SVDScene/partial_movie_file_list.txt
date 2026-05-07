@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/SVDScene/2257293077_1899051847_223132457.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/SVDScene/2135761390_671065512_1951006239.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/SVDScene/2135761390_4217992463_2628692482.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/SVDScene/2135761390_2210042896_3470589998.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/SVDScene/2135761390_402799986_3702220602.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/SVDScene/2135761390_2844360058_4044254291.mp4'
