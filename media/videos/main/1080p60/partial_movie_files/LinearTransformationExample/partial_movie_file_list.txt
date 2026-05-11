@@ -1,4 +1,6 @@
 # This file is used internally by FFMPEG.
-file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2257293077_2688965532_2379147119.mp4'
-file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2135761390_2384476488_2859851701.mp4'
-file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2135761390_2844360058_2581051667.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2257293077_95173422_1444088772.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2135761390_2562937006_1461952593.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2135761390_2834709167_3505645420.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2135761390_2470769839_2477531915.mp4'
+file 'file:C:/Users/Júlia/UFG/MD/projeto_video/media/videos/main/1080p60/partial_movie_files/LinearTransformationExample/2135761390_3366045169_1881933758.mp4'
