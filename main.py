@@ -863,3 +863,389 @@ class Conclusion(Scene):
         )
         self.wait(2.5)
         self.play(FadeOut(credits), run_time=1.5)
+
+
+# ==============================================================
+# CENA EXTRA A — ESCALARES, VETORES, MATRIZES E TENSORES
+# Duração: ~2min 30s  |  Apresentadora: Júlia
+# ==============================================================
+
+class ScalarsAndTensors(Scene):
+    def construct(self):
+        self.camera.background_color = BG
+
+        title = Text(
+            "Estruturas da Álgebra Linear",
+            font_size=32, color=WHITE,
+        ).to_edge(UP, buff=0.45)
+        self.play(Write(title), run_time=0.8)
+
+        # ── ESCALAR ──────────────────────────────────────────
+        sc_lbl = Text("Escalar", font_size=26, color=CYAN_C, weight=BOLD)
+        sc_val = MathTex("3{,}7", font_size=80, color=WHITE)
+        sc_ex  = VGroup(
+            Text("temperatura", font_size=15, color=GRAY_C),
+            Text("probabilidade", font_size=15, color=GRAY_C),
+            Text("taxa de aprendizado", font_size=15, color=GRAY_C),
+        ).arrange(DOWN, buff=0.1)
+        sc_card = VGroup(sc_lbl, sc_val, sc_ex).arrange(DOWN, buff=0.25)
+        sc_card.move_to([-4.8, -0.2, 0])
+
+        self.play(Write(sc_lbl), Write(sc_val))
+        self.play(LaggedStart(*[FadeIn(e) for e in sc_ex], lag_ratio=0.25))
+
+        # ── VETOR ────────────────────────────────────────────
+        ve_lbl = Text("Vetor", font_size=26, color=BLUE_C, weight=BOLD)
+        ve_val = MathTex(
+            r"\begin{bmatrix} \text{idade} \\ \text{altura} \\ \text{renda} \\ \vdots \end{bmatrix}",
+            font_size=30,
+        )
+        ve_ex = Text("características de um objeto", font_size=15, color=GRAY_C)
+        ve_card = VGroup(ve_lbl, ve_val, ve_ex).arrange(DOWN, buff=0.25)
+        ve_card.move_to([-1.6, -0.2, 0])
+
+        self.play(Write(ve_lbl), Create(ve_val))
+        self.play(FadeIn(ve_ex))
+
+        # ── MATRIZ ───────────────────────────────────────────
+        ma_lbl = Text("Matriz", font_size=26, color=GREEN_C, weight=BOLD)
+        ma_val = Matrix(
+            [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+            h_buff=0.7, v_buff=0.6,
+        ).scale(0.55)
+        ma_ex = Text("conjunto de dados", font_size=15, color=GRAY_C)
+        ma_card = VGroup(ma_lbl, ma_val, ma_ex).arrange(DOWN, buff=0.25)
+        ma_card.move_to([1.6, -0.2, 0])
+
+        self.play(Write(ma_lbl), Create(ma_val))
+        self.play(FadeIn(ma_ex))
+
+        # ── TENSOR ───────────────────────────────────────────
+        te_lbl = Text("Tensor", font_size=26, color=YELLOW_C, weight=BOLD)
+
+        # Representação visual: 3 quadrados empilhados (canais R, G, B)
+        b_sq = Square(side_length=1.3, fill_color=BLUE,  fill_opacity=0.55, stroke_width=1.5, color=WHITE)
+        g_sq = Square(side_length=1.3, fill_color=GREEN, fill_opacity=0.55, stroke_width=1.5, color=WHITE)
+        r_sq = Square(side_length=1.3, fill_color=RED,   fill_opacity=0.55, stroke_width=1.5, color=WHITE)
+
+        b_sq.move_to([4.8 + 0.3,  0.2, 0])
+        g_sq.move_to([4.8,        0.0, 0])
+        r_sq.move_to([4.8 - 0.3, -0.2, 0])
+
+        te_stack = VGroup(b_sq, g_sq, r_sq)
+        te_stack.next_to(te_lbl, DOWN, buff=0.3)
+
+        rgb_lbl = Text("R  G  B  (3 canais)", font_size=15, color=GRAY_C)
+        rgb_lbl.next_to(te_stack, DOWN, buff=0.25)
+
+        te_card = VGroup(te_lbl, te_stack, rgb_lbl)
+        te_card.move_to([4.8, -0.2, 0])
+
+        self.play(Write(te_lbl), FadeIn(te_stack))
+        self.play(FadeIn(rgb_lbl))
+        self.wait(0.8)
+
+        # ── Hierarquia final ─────────────────────────────────
+        hierarchy = VGroup(
+            Text("escalar",  font_size=20, color=CYAN_C),
+            Text("→",        font_size=20, color=GRAY_C),
+            Text("vetor",    font_size=20, color=BLUE_C),
+            Text("→",        font_size=20, color=GRAY_C),
+            Text("matriz",   font_size=20, color=GREEN_C),
+            Text("→",        font_size=20, color=GRAY_C),
+            Text("tensor",   font_size=20, color=YELLOW_C),
+        ).arrange(RIGHT, buff=0.3).to_edge(DOWN, buff=0.5)
+
+        self.play(
+            LaggedStart(*[Write(h) for h in hierarchy], lag_ratio=0.2),
+            run_time=1.5,
+        )
+        self.wait(1.5)
+        self.play(
+            FadeOut(title),
+            FadeOut(sc_card), FadeOut(ve_card),
+            FadeOut(ma_card), FadeOut(te_card),
+            FadeOut(hierarchy),
+        )
+
+
+# ==============================================================
+# CENA EXTRA B — VETORIZAÇÃO: TEXTO E ÁUDIO
+# Duração: ~1min 45s  |  Apresentadora: Giovanna
+# ==============================================================
+
+class TextAudioVectorization(Scene):
+    def construct(self):
+        self.camera.background_color = BG
+
+        title = Text("Vetorização de Dados", font_size=32, color=WHITE)
+        title.to_edge(UP, buff=0.45)
+        self.play(Write(title), run_time=0.8)
+
+        # ══════════════════════════════════════════════
+        # SEÇÃO 1 — TEXTO → EMBEDDING
+        # ══════════════════════════════════════════════
+        sec1 = Text("Texto → Embedding", font_size=24, color=CYAN_C)
+        sec1.next_to(title, DOWN, buff=0.35)
+        self.play(Write(sec1), run_time=0.6)
+
+        # Palavra "gato" e embedding
+        word_gato = Text('"gato"', font_size=40, color=WHITE)
+        word_gato.move_to([-4.5, -0.3, 0])
+
+        arrow_embed = Arrow(LEFT * 0.1, RIGHT * 0.1, color=CYAN_C, buff=0, stroke_width=3)
+        arrow_embed.move_to([-2.2, -0.3, 0])
+        arrow_embed.set_width(1.2)
+
+        # Vetor de embedding (valores ilustrativos)
+        embed_vals = MathTex(
+            r"\begin{bmatrix} 0.21 \\ 0.85 \\ {-0.34} \\ 0.67 \\ \vdots \\ 0.12 \end{bmatrix}",
+            font_size=26,
+        ).move_to([-0.5, -0.3, 0])
+
+        embed_note = Text("768 dimensões (BERT)", font_size=16, color=GRAY_C)
+        embed_note.next_to(embed_vals, RIGHT, buff=0.5)
+
+        self.play(Write(word_gato))
+        self.play(GrowArrow(arrow_embed))
+        self.play(Create(embed_vals))
+        self.play(FadeIn(embed_note))
+        self.wait(0.5)
+
+        # Espaço semântico simplificado (2D)
+        axes = Axes(
+            x_range=[-2, 2, 1], y_range=[-1.5, 1.5, 1],
+            x_length=3.5, y_length=2.8,
+            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.5},
+        ).move_to([4.0, -0.3, 0])
+
+        dot_gato     = Dot(axes.c2p( 0.3,  0.7), color=BLUE_C,   radius=0.1)
+        dot_cachorro = Dot(axes.c2p( 0.5,  0.4), color=GREEN_C,  radius=0.1)
+        dot_mesa     = Dot(axes.c2p(-1.2, -0.9), color=RED,      radius=0.1)
+
+        lbl_g = Text("gato",     font_size=15, color=BLUE_C ).next_to(dot_gato,     UR, buff=0.08)
+        lbl_c = Text("cachorro", font_size=15, color=GREEN_C).next_to(dot_cachorro, DR, buff=0.08)
+        lbl_m = Text("mesa",     font_size=15, color=RED    ).next_to(dot_mesa,     DL, buff=0.08)
+
+        # linha mostrando proximidade gato-cachorro
+        prox_line = DashedLine(dot_gato.get_center(), dot_cachorro.get_center(), color=YELLOW_C)
+
+        self.play(Create(axes))
+        self.play(
+            FadeIn(dot_gato), FadeIn(dot_cachorro), FadeIn(dot_mesa),
+            FadeIn(lbl_g),    FadeIn(lbl_c),        FadeIn(lbl_m),
+        )
+        self.play(Create(prox_line))
+        self.wait(0.8)
+
+        # ── Limpa seção 1 ────────────────────────────────────
+        self.play(
+            FadeOut(sec1), FadeOut(word_gato), FadeOut(arrow_embed),
+            FadeOut(embed_vals), FadeOut(embed_note),
+            FadeOut(axes), FadeOut(dot_gato), FadeOut(dot_cachorro), FadeOut(dot_mesa),
+            FadeOut(lbl_g), FadeOut(lbl_c), FadeOut(lbl_m), FadeOut(prox_line),
+            run_time=0.7,
+        )
+
+        # ══════════════════════════════════════════════
+        # SEÇÃO 2 — ÁUDIO → MATRIZ DE FREQUÊNCIAS
+        # ══════════════════════════════════════════════
+        sec2 = Text("Áudio → Matriz de Frequências", font_size=24, color=CYAN_C)
+        sec2.next_to(title, DOWN, buff=0.35)
+        self.play(Write(sec2), run_time=0.6)
+
+        # Onda sonora
+        wave_axes = Axes(
+            x_range=[0, 4 * PI, PI],
+            y_range=[-1.5, 1.5, 1],
+            x_length=5.5, y_length=2.0,
+            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.5},
+        ).move_to([-3.0, 0.5, 0])
+
+        wave_curve = wave_axes.plot(
+            lambda x: np.sin(x) + 0.5 * np.sin(3 * x),
+            color=CYAN_C, stroke_width=2.5,
+        )
+        wave_lbl = Text("sinal de áudio", font_size=16, color=GRAY_C)
+        wave_lbl.next_to(wave_axes, DOWN, buff=0.2)
+
+        self.play(Create(wave_axes), Create(wave_curve))
+        self.play(FadeIn(wave_lbl))
+        self.wait(0.4)
+
+        # Setas: amostrar → Fourier
+        step1 = Text("① amostrar (kHz)", font_size=18, color=YELLOW_C)
+        step2 = Text("② Transformada de Fourier", font_size=18, color=YELLOW_C)
+        steps = VGroup(step1, step2).arrange(DOWN, buff=0.3).move_to([0.0, 0.3, 0])
+
+        arr1 = Arrow(wave_axes.get_right() + RIGHT * 0.15,
+                     steps.get_left()      + LEFT  * 0.15,
+                     color=GRAY_C, buff=0, stroke_width=2)
+
+        self.play(GrowArrow(arr1), FadeIn(steps))
+        self.wait(0.4)
+
+        # Matriz de espectrograma (representação visual simples)
+        freq_matrix = Matrix(
+            [[1, 3, 0, 2], [0, 5, 4, 1], [2, 1, 6, 3]],
+            h_buff=0.7, v_buff=0.65,
+        ).scale(0.6).move_to([3.8, 0.3, 0])
+
+        freq_lbl = Text("espectrograma\n(freq × tempo)", font_size=15, color=GRAY_C)
+        freq_lbl.next_to(freq_matrix, DOWN, buff=0.2)
+
+        arr2 = Arrow(steps.get_right() + RIGHT * 0.15,
+                     freq_matrix.get_left() + LEFT * 0.15,
+                     color=GRAY_C, buff=0, stroke_width=2)
+
+        self.play(GrowArrow(arr2), Create(freq_matrix))
+        self.play(FadeIn(freq_lbl))
+        self.wait(1.2)
+
+        self.play(
+            FadeOut(title), FadeOut(sec2),
+            FadeOut(wave_axes), FadeOut(wave_curve), FadeOut(wave_lbl),
+            FadeOut(arr1), FadeOut(steps), FadeOut(arr2),
+            FadeOut(freq_matrix), FadeOut(freq_lbl),
+            run_time=0.8,
+        )
+
+
+# ==============================================================
+# CENA EXTRA C — DISTÂNCIA EUCLIDIANA E SIMILARIDADE COSSENO
+# Duração: ~2min 30s  |  Apresentadora: Giovanna
+# (substitui/expande CosineSimilarity com distância euclidiana)
+# ==============================================================
+
+class SimilarityMetrics(Scene):
+    def construct(self):
+        self.camera.background_color = BG
+
+        title = Text("Métricas de Similaridade", font_size=32, color=WHITE)
+        title.to_edge(UP, buff=0.45)
+        self.play(Write(title))
+
+        # ══════════════════════════════════════════════
+        # SEÇÃO 1 — DISTÂNCIA EUCLIDIANA
+        # ══════════════════════════════════════════════
+        sec1 = Text("Distância Euclidiana", font_size=26, color=CYAN_C)
+        sec1.next_to(title, DOWN, buff=0.3)
+        self.play(Write(sec1))
+
+        plane1 = NumberPlane(
+            background_line_style={"stroke_color": BLUE_E, "stroke_opacity": 0.25},
+            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.6},
+            x_range=[-4, 4], y_range=[-3, 3],
+        ).scale(0.72).move_to([0, -0.6, 0])
+        self.play(Create(plane1), run_time=1.0)
+
+        a_end = np.array([-2.0,  1.5, 0])
+        b_end = np.array([ 1.8, -0.8, 0])
+
+        dot_a = Dot(a_end, color=BLUE_C,  radius=0.12)
+        dot_b = Dot(b_end, color=GREEN_C, radius=0.12)
+        lbl_a = MathTex("A", color=BLUE_C,  font_size=30).next_to(dot_a, UL, buff=0.1)
+        lbl_b = MathTex("B", color=GREEN_C, font_size=30).next_to(dot_b, DR, buff=0.1)
+
+        # Linha de distância
+        dist_line = Line(a_end, b_end, color=YELLOW_C, stroke_width=3)
+        dist_brace = BraceBetweenPoints(a_end, b_end, direction=UP * 0.5, color=YELLOW_C)
+        dist_label = MathTex("d", color=YELLOW_C, font_size=28)
+        dist_label.next_to(dist_brace, UP, buff=0.1)
+
+        self.play(FadeIn(dot_a), FadeIn(dot_b), Write(lbl_a), Write(lbl_b))
+        self.play(Create(dist_line))
+        self.play(Create(dist_brace), Write(dist_label))
+
+        euc_formula = MathTex(
+            r"d = \sqrt{\sum_{i}(a_i - b_i)^2}",
+            font_size=34, color=WHITE,
+        ).to_corner(DR, buff=0.6)
+        self.play(Write(euc_formula))
+
+        use1 = Text("→ agrupamento de clientes\n→ detecção de anomalias\n→ classificação por medidas",
+                    font_size=17, color=GRAY_C).to_corner(DL, buff=0.5)
+        self.play(FadeIn(use1))
+        self.wait(0.8)
+
+        self.play(
+            FadeOut(plane1), FadeOut(dot_a), FadeOut(dot_b),
+            FadeOut(lbl_a), FadeOut(lbl_b), FadeOut(dist_line),
+            FadeOut(dist_brace), FadeOut(dist_label),
+            FadeOut(euc_formula), FadeOut(use1), FadeOut(sec1),
+            run_time=0.8,
+        )
+
+        # ══════════════════════════════════════════════
+        # SEÇÃO 2 — SIMILARIDADE DE COSSENO
+        # ══════════════════════════════════════════════
+        sec2 = Text("Similaridade de Cosseno", font_size=26, color=CYAN_C)
+        sec2.next_to(title, DOWN, buff=0.3)
+        self.play(Write(sec2))
+
+        plane2 = NumberPlane(
+            background_line_style={"stroke_color": BLUE_E, "stroke_opacity": 0.25},
+            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.6},
+        )
+        cos_formula = MathTex(
+            r"\cos(\theta) = \frac{\vec{A} \cdot \vec{B}}{\|\vec{A}\|\,\|\vec{B}\|}",
+            font_size=36, color=WHITE,
+        ).to_edge(UP, buff=0.45)
+
+        self.play(Create(plane2), run_time=1.0)
+        self.play(Write(cos_formula), run_time=0.8)
+
+        a2_end = [4, 1.5, 0]
+        b2_end = [2, 3.5, 0]
+
+        vec_a = Vector(a2_end, color=BLUE_C,  stroke_width=5)
+        vec_b = Vector(b2_end, color=GREEN_C, stroke_width=5)
+        lbl_va = MathTex(r"\vec{A}", color=BLUE_C,  font_size=34).next_to(vec_a.get_end(), RIGHT, buff=0.15)
+        lbl_vb = MathTex(r"\vec{B}", color=GREEN_C, font_size=34).next_to(vec_b.get_end(), UR,    buff=0.15)
+
+        self.play(GrowArrow(vec_a), Write(lbl_va))
+        self.play(GrowArrow(vec_b), Write(lbl_vb))
+
+        # Ângulo
+        line_a = Line(ORIGIN, a2_end)
+        line_b = Line(ORIGIN, b2_end)
+        angle  = Angle(line_a, line_b, radius=1.0, color=YELLOW_C)
+
+        mid_dir = (
+            np.array(a2_end) / np.linalg.norm(a2_end) +
+            np.array(b2_end) / np.linalg.norm(b2_end)
+        )
+        mid_dir = mid_dir / np.linalg.norm(mid_dir) * 1.45
+        theta_lbl = MathTex(r"\theta", color=YELLOW_C, font_size=30).move_to(mid_dir)
+
+        self.play(Create(angle), Write(theta_lbl))
+        self.wait(0.6)
+
+        # Casos de similaridade
+        self.play(
+            FadeOut(plane2), FadeOut(vec_a), FadeOut(vec_b),
+            FadeOut(lbl_va), FadeOut(lbl_vb),
+            FadeOut(angle), FadeOut(theta_lbl),
+            run_time=0.7,
+        )
+
+        cases = VGroup(
+            Text('θ ≈ 0°    →  cos = 1    →  textos idênticos',    font_size=24, color=GREEN_C),
+            Text('θ ≈ 90°   →  cos = 0    →  sem relação',         font_size=24, color=YELLOW_C),
+            Text('θ ≈ 180°  →  cos = −1   →  totalmente opostos',  font_size=24, color=RED),
+        ).arrange(DOWN, buff=0.5, aligned_edge=LEFT)
+
+        use2 = Text(
+            "→ busca semântica   → recomendação   → grandes modelos de linguagem",
+            font_size=18, color=GRAY_C,
+        ).next_to(cases, DOWN, buff=0.5)
+
+        self.play(
+            LaggedStart(*[Write(c) for c in cases], lag_ratio=0.4),
+            run_time=1.8,
+        )
+        self.play(FadeIn(use2))
+        self.wait(1.2)
+
+        self.play(FadeOut(cases), FadeOut(use2), FadeOut(sec2),
+                  FadeOut(cos_formula), FadeOut(title))
