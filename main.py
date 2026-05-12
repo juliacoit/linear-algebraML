@@ -131,153 +131,40 @@ class Intro(Scene):
 
         self.play(FadeOut(question), FadeOut(cursor), run_time=0.8)
 
+        # ── 5 bullets ─────────────────────────────────────────
+        bullets_data = [
+            ("①", "Representar dados de forma numérica"),
+            ("②", "Organizar esses dados em estruturas"),
+            ("③", "Transformar estruturas para extrair informação"),
+            ("④", "Comparar informações para identificar padrões"),
+            ("⑤", "Fazer tudo isso a bilhões de operações/segundo"),
+        ]
 
-# ==============================================================
-# CENA 2 — VETORES
-# Duração: ~2min
-# ==============================================================
-
-class Vectors(Scene):
-    def construct(self):
-        self.camera.background_color = BG
-
-        # ── Plano cartesiano ─────────────────────────────────
-        OFFSET = DOWN * 1.2
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_color": BLUE_E,
-                "stroke_opacity": 0.3,
-            },
-            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.8},
-        ).shift(OFFSET)
-        self.play(Create(plane), run_time=1.5)
-
-        # ── Vetor A ──────────────────────────────────────────
-        vector_a = Vector([3, 2], color=BLUE_C, stroke_width=5).shift(OFFSET)
-        label_a  = MathTex(r"\vec{A}", color=BLUE_C, font_size=36)
-        label_a.next_to(vector_a.get_end(), UR, buff=0.15)
-
-        self.play(GrowArrow(vector_a), Write(label_a))
-
-        # ── Vetor B ──────────────────────────────────────────
-        vector_b = Vector([1, 4], color=GREEN_C, stroke_width=5).shift(OFFSET)
-        label_b  = MathTex(r"\vec{B}", color=GREEN_C, font_size=36)
-        label_b.next_to(vector_b.get_end(), UL, buff=0.15)
-
-        self.play(GrowArrow(vector_b), Write(label_b))
-        self.wait(0.8)
-
-        # ── Boxes com features ───────────────────────────────
-        def feature_box(lines, color, pos):
-            rect  = Rectangle(
-                width=2.9, height=1.7, color=color,
-                stroke_width=1.5, fill_opacity=0.1, fill_color=color,
-            )
-            texts = VGroup(*[
-                Text(t, font_size=17, color=WHITE) for t in lines
-            ]).arrange(DOWN, buff=0.18)
-            texts.move_to(rect)
-            return VGroup(rect, texts).move_to(pos)
-
-        box_a = feature_box(["Peso:  3 kg", "Altura: 2 dm"], BLUE_C,  [-4.6, -2.8, 0])
-        box_b = feature_box(["Peso:  1 kg", "Altura: 4 dm"], GREEN_C, [ 4.6, -2.8, 0])
-
-        self.play(FadeIn(box_a), FadeIn(box_b), run_time=0.8)
-
-        # ── Labels: A/B → Gato/Cachorro ──────────────────────
-        label_a_new = Text("Gato",     font_size=22, color=BLUE_C)
-        label_a_new.next_to(vector_a.get_end(), UR, buff=0.15)
-
-        label_b_new = Text("Cachorro", font_size=22, color=GREEN_C)
-        label_b_new.next_to(vector_b.get_end(), UL, buff=0.15)
+        bullets = VGroup(*[
+            VGroup(
+                Text(num,  font_size=28, color=CYAN_C),
+                Text(text, font_size=26, color=WHITE),
+            ).arrange(RIGHT, buff=0.3)
+            for num, text in bullets_data
+        ]).arrange(DOWN, buff=0.4, aligned_edge=LEFT)
 
         self.play(
-            Transform(label_a, label_a_new),
-            Transform(label_b, label_b_new),
-            run_time=0.8,
+            LaggedStart(*[Write(b) for b in bullets], lag_ratio=0.4),
+            run_time=2.0,
         )
-        self.wait(1.0)
-
-        # ── Fechamento ───────────────────────────────────────
-        self.play(
-            FadeOut(plane), FadeOut(vector_a), FadeOut(vector_b),
-            FadeOut(label_a), FadeOut(label_b),
-            FadeOut(box_a),   FadeOut(box_b),
-            run_time=0.8,
-        )
-        closing = Text(
-            "Vetores = Representação matemática de dados",
-            font_size=34, color=CYAN_C,
-        )
-        self.play(Write(closing), run_time=1.5)
-        self.wait(1.5)
-        self.play(FadeOut(closing))
-
-
-# ==============================================================
-# CENA 3 — MATRIZES
-# Duração: ~1min 30s
-# ==============================================================
-
-class MatrixScene(Scene):
-    def construct(self):
-        self.camera.background_color = BG
-
-        # ── Título ───────────────────────────────────────────
-        title = Text("Dados organizados em matrizes", font_size=34, color=WHITE)
-        title.to_edge(UP, buff=0.5)
-        self.play(Write(title), run_time=1.0)
-
-        # ── Matriz 3×3 ───────────────────────────────────────
-        matrix = Matrix(
-            [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-            h_buff=1.0, v_buff=0.8,
-        ).set_color(WHITE)
-
-        self.play(Create(matrix), run_time=1.5)
         self.wait(0.5)
 
-        # ── Labels nas linhas ────────────────────────────────
-        row_labels = VGroup(
-            Text("Animal 1", font_size=18, color=BLUE_C),
-            Text("Animal 2", font_size=18, color=BLUE_C),
-            Text("Animal 3", font_size=18, color=BLUE_C),
-        )
-        for i, lbl in enumerate(row_labels):
-            lbl.next_to(matrix.get_rows()[i], LEFT, buff=0.5)
+        # ── Frase de fechamento ───────────────────────────────
+        self.play(FadeOut(bullets), run_time=0.6)
 
-        # ── Labels nas colunas ───────────────────────────────
-        col_labels = VGroup(
-            Text("Peso",   font_size=18, color=GREEN_C),
-            Text("Altura", font_size=18, color=GREEN_C),
-            Text("Cor",    font_size=18, color=GREEN_C),
-        )
-        for i, lbl in enumerate(col_labels):
-            lbl.next_to(matrix.get_columns()[i], UP, buff=0.4)
-
-        self.play(
-            LaggedStart(*[FadeIn(l) for l in row_labels], lag_ratio=0.3),
-            LaggedStart(*[FadeIn(l) for l in col_labels], lag_ratio=0.3),
-            run_time=1.0,
-        )
-
-        # ── Destaque na linha 2 ──────────────────────────────
-        self.play(Indicate(matrix.get_rows()[1], color=YELLOW_C, scale_factor=1.1))
-        self.wait(0.8)
-
-        # ── Fechamento ───────────────────────────────────────
-        self.play(
-            FadeOut(matrix), FadeOut(row_labels),
-            FadeOut(col_labels), FadeOut(title),
-            run_time=0.8,
-        )
         closing = Text(
-            "Matrizes = Organização de grandes conjuntos de dados",
-            font_size=28, color=CYAN_C,
+            "A álgebra linear é a única ferramenta matemática\n"
+            "que faz as cinco coisas de maneira eficiente.",
+            font_size=30, color=WHITE, line_spacing=1.4,
         )
         self.play(Write(closing), run_time=1.5)
-        self.wait(1.5)
-        self.play(FadeOut(closing))
+        self.wait(1.2)
+        self.play(FadeOut(closing), run_time=0.8)
 
 
 # ==============================================================
@@ -360,116 +247,6 @@ class ImageToMatrix(Scene):
         )
         self.wait(1.5)
         self.play(FadeOut(pipeline))
-
-
-# ==============================================================
-# CENA 5 — SIMILARIDADE COSSENO
-# Duração: ~2min
-# ==============================================================
-
-class CosineSimilarity(Scene):
-    def construct(self):
-        self.camera.background_color = BG
-
-        # ── Plano + fórmula ──────────────────────────────────
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_color": BLUE_E,
-                "stroke_opacity": 0.3,
-            },
-            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.7},
-        )
-        formula = MathTex(
-            r"\cos(\theta) = \frac{\vec{A} \cdot \vec{B}}{\|\vec{A}\|\,\|\vec{B}\|}",
-            color=WHITE, font_size=38,
-        ).to_edge(UP, buff=0.4)
-
-        self.play(Create(plane), run_time=1.2)
-        self.play(Write(formula), run_time=1.0)
-
-        # ── Vetores ──────────────────────────────────────────
-        a_end = [4, 1.5, 0]
-        b_end = [2, 3.5, 0]
-
-        vec_a = Vector(a_end, color=BLUE_C,  stroke_width=5)
-        vec_b = Vector(b_end, color=GREEN_C, stroke_width=5)
-
-        lbl_a = MathTex(r"\vec{A}", color=BLUE_C,  font_size=36)
-        lbl_b = MathTex(r"\vec{B}", color=GREEN_C, font_size=36)
-        lbl_a.next_to(vec_a.get_end(), RIGHT, buff=0.15)
-        lbl_b.next_to(vec_b.get_end(), UR,    buff=0.15)
-
-        self.play(GrowArrow(vec_a), Write(lbl_a))
-        self.play(GrowArrow(vec_b), Write(lbl_b))
-
-        # ── Ângulo θ ─────────────────────────────────────────
-        line_a = Line(ORIGIN, a_end)
-        line_b = Line(ORIGIN, b_end)
-        angle  = Angle(line_a, line_b, radius=1.0, color=YELLOW_C)
-
-        # posição da label θ no meio do arco
-        mid_dir = (
-            np.array(a_end) / np.linalg.norm(a_end) +
-            np.array(b_end) / np.linalg.norm(b_end)
-        )
-        mid_dir = mid_dir / np.linalg.norm(mid_dir) * 1.45
-        theta_lbl = MathTex(r"\theta", color=YELLOW_C, font_size=32)
-        theta_lbl.move_to(mid_dir)
-
-        self.play(Create(angle), Write(theta_lbl))
-        self.wait(0.8)
-        self.play(Indicate(formula, color=YELLOW_C, scale_factor=1.04))
-
-        # ── Casos de similaridade ────────────────────────────
-        self.play(
-            FadeOut(plane), FadeOut(vec_a), FadeOut(vec_b),
-            FadeOut(lbl_a), FadeOut(lbl_b),
-            FadeOut(angle), FadeOut(theta_lbl),
-            run_time=0.8,
-        )
-
-        cases = VGroup(
-            Text('θ ≈ 0°    →  cos(θ) = 1    →  "textos idênticos"',   font_size=25, color=GREEN_C),
-            Text('θ ≈ 90°   →  cos(θ) = 0    →  "sem relação"',        font_size=25, color=YELLOW_C),
-            Text('θ ≈ 180°  →  cos(θ) = −1   →  "totalmente opostos"', font_size=25, color=RED),
-        ).arrange(DOWN, buff=0.55, aligned_edge=LEFT)
-
-        self.play(
-            LaggedStart(*[Write(c) for c in cases], lag_ratio=0.4),
-            run_time=1.8,
-        )
-        self.wait(0.8)
-
-        # ── Aplicações práticas ──────────────────────────────
-        self.play(FadeOut(cases), FadeOut(formula), run_time=0.6)
-
-        app_title = Text("Aplicações", font_size=30, color=CYAN_C)
-        app_title.to_edge(UP, buff=0.5)
-
-        def app_card(lines, color):
-            rect  = RoundedRectangle(
-                corner_radius=0.15, width=2.6, height=1.4,
-                color=color, fill_color=color, fill_opacity=0.14, stroke_width=1.5,
-            )
-            text  = VGroup(*[
-                Text(l, font_size=19, color=WHITE) for l in lines
-            ]).arrange(DOWN, buff=0.15)
-            text.move_to(rect)
-            return VGroup(rect, text)
-
-        cards = VGroup(
-            app_card(["NLP",        "Semântica de texto"], BLUE_C),
-            app_card(["Busca",      "Vetorial"],           CYAN_C),
-            app_card(["Reco-",      "mendação"],           PURPLE_C),
-        ).arrange(RIGHT, buff=0.6)
-
-        self.play(Write(app_title))
-        self.play(
-            LaggedStart(*[FadeIn(c, scale=0.88) for c in cards], lag_ratio=0.3),
-            run_time=1.2,
-        )
-        self.wait(1.5)
-        self.play(FadeOut(cards), FadeOut(app_title))
 
 
 # ==============================================================
