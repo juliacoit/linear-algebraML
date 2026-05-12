@@ -979,134 +979,141 @@ class TextAudioVectorization(Scene):
         self.camera.background_color = BG
 
         title = Text("Vetorização de Dados", font_size=32, color=WHITE)
-        title.to_edge(UP, buff=0.45)
+        title.to_edge(UP, buff=0.4)
         self.play(Write(title), run_time=0.8)
 
-        # ══════════════════════════════════════════════
-        # SEÇÃO 1 — TEXTO → EMBEDDING
-        # ══════════════════════════════════════════════
-        sec1 = Text("Texto → Embedding", font_size=24, color=CYAN_C)
-        sec1.next_to(title, DOWN, buff=0.35)
-        self.play(Write(sec1), run_time=0.6)
+        # ══ SEÇÃO 1 — TEXTO → EMBEDDING ══════════════════════
 
-        # Palavra "gato" e embedding
-        word_gato = Text('"gato"', font_size=40, color=WHITE)
-        word_gato.move_to([-4.5, -0.3, 0])
+        sec1 = Text("Texto  →  Embedding", font_size=24, color=CYAN_C)
+        sec1.next_to(title, DOWN, buff=0.3)
+        self.play(Write(sec1), run_time=0.5)
 
-        arrow_embed = Arrow(LEFT * 0.1, RIGHT * 0.1, color=CYAN_C, buff=0, stroke_width=3)
-        arrow_embed.move_to([-2.2, -0.3, 0])
-        arrow_embed.set_width(1.2)
+        # ── Espaço semântico (direita) — posiciona PRIMEIRO para c2p funcionar ──
+        sem_axes = Axes(
+            x_range=[-2, 2, 1], y_range=[-2, 2, 1],
+            x_length=3.0, y_length=2.8,
+            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.4},
+        ).move_to([3.8, -0.2, 0])
 
-        # Vetor de embedding (valores ilustrativos)
-        embed_vals = MathTex(
-            r"\begin{bmatrix} 0.21 \\ 0.85 \\ {-0.34} \\ 0.67 \\ \vdots \\ 0.12 \end{bmatrix}",
-            font_size=26,
-        ).move_to([-0.5, -0.3, 0])
+        sem_title = Text("espaço semântico", font_size=14, color=GRAY_C)
+        sem_title.next_to(sem_axes, UP, buff=0.1)
 
-        embed_note = Text("768 dimensões (BERT)", font_size=16, color=GRAY_C)
-        embed_note.next_to(embed_vals, RIGHT, buff=0.5)
+        # c2p só é chamado DEPOIS de move_to
+        dot_g = Dot(sem_axes.c2p( 0.5,  1.0), color=BLUE_C,  radius=0.10)
+        dot_c = Dot(sem_axes.c2p( 1.0,  0.4), color=GREEN_C, radius=0.10)
+        dot_m = Dot(sem_axes.c2p(-1.2, -1.0), color=RED,     radius=0.10)
 
-        self.play(Write(word_gato))
-        self.play(GrowArrow(arrow_embed))
-        self.play(Create(embed_vals))
-        self.play(FadeIn(embed_note))
-        self.wait(0.5)
+        lbl_g = Text("gato",     font_size=13, color=BLUE_C ).next_to(dot_g, UR, buff=0.05)
+        lbl_c = Text("cachorro", font_size=13, color=GREEN_C).next_to(dot_c, DR, buff=0.05)
+        lbl_m = Text("mesa",     font_size=13, color=RED    ).next_to(dot_m, DL, buff=0.05)
 
-        # Espaço semântico simplificado (2D)
-        axes = Axes(
-            x_range=[-2, 2, 1], y_range=[-1.5, 1.5, 1],
-            x_length=3.5, y_length=2.8,
-            axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.5},
-        ).move_to([4.0, -0.3, 0])
+        prox = DashedLine(dot_g.get_center(), dot_c.get_center(),
+                          color=YELLOW_C, dash_length=0.12)
 
-        dot_gato     = Dot(axes.c2p( 0.3,  0.7), color=BLUE_C,   radius=0.1)
-        dot_cachorro = Dot(axes.c2p( 0.5,  0.4), color=GREEN_C,  radius=0.1)
-        dot_mesa     = Dot(axes.c2p(-1.2, -0.9), color=RED,      radius=0.1)
+        # ── Pipeline esquerda: palavra → seta → embedding ────
+        # Todos os elementos posicionados relativamente entre si
+        word = Text('"gato"', font_size=36, color=WHITE).move_to([-4.8, 0.3, 0])
 
-        lbl_g = Text("gato",     font_size=15, color=BLUE_C ).next_to(dot_gato,     UR, buff=0.08)
-        lbl_c = Text("cachorro", font_size=15, color=GREEN_C).next_to(dot_cachorro, DR, buff=0.08)
-        lbl_m = Text("mesa",     font_size=15, color=RED    ).next_to(dot_mesa,     DL, buff=0.08)
-
-        # linha mostrando proximidade gato-cachorro
-        prox_line = DashedLine(dot_gato.get_center(), dot_cachorro.get_center(), color=YELLOW_C)
-
-        self.play(Create(axes))
-        self.play(
-            FadeIn(dot_gato), FadeIn(dot_cachorro), FadeIn(dot_mesa),
-            FadeIn(lbl_g),    FadeIn(lbl_c),        FadeIn(lbl_m),
+        arr_e = Arrow(
+            word.get_right() + RIGHT * 0.2,
+            word.get_right() + RIGHT * 1.1,
+            color=CYAN_C, buff=0, stroke_width=3,
         )
-        self.play(Create(prox_line))
+
+        embed_inline = MathTex(
+            r"\vec{e} = [0.21,\ 0.85,\ {-0.34},\ \ldots]",
+            font_size=20, color=WHITE,
+        ).next_to(arr_e, RIGHT, buff=0.2)
+
+        embed_note = Text("768 dim (BERT)", font_size=14, color=GRAY_C)
+        embed_note.next_to(embed_inline, DOWN, buff=0.18)
+
+        # Linha divisória vertical (opcional, visual aid)
+        divider = DashedLine(
+            start=[0.5, 2.0, 0], end=[0.5, -2.5, 0],
+            color=GRAY_C, stroke_opacity=0.3, dash_length=0.18,
+        )
+
+        self.play(Write(word))
+        self.play(GrowArrow(arr_e))
+        self.play(Write(embed_inline))
+        self.play(FadeIn(embed_note))
+        self.play(Create(divider), Create(sem_axes), FadeIn(sem_title))
+        self.play(
+            FadeIn(dot_g), FadeIn(dot_c), FadeIn(dot_m),
+            FadeIn(lbl_g), FadeIn(lbl_c), FadeIn(lbl_m),
+        )
+        self.play(Create(prox))
         self.wait(0.8)
 
-        # ── Limpa seção 1 ────────────────────────────────────
         self.play(
-            FadeOut(sec1), FadeOut(word_gato), FadeOut(arrow_embed),
-            FadeOut(embed_vals), FadeOut(embed_note),
-            FadeOut(axes), FadeOut(dot_gato), FadeOut(dot_cachorro), FadeOut(dot_mesa),
-            FadeOut(lbl_g), FadeOut(lbl_c), FadeOut(lbl_m), FadeOut(prox_line),
-            run_time=0.7,
+            FadeOut(sec1), FadeOut(word), FadeOut(arr_e),
+            FadeOut(embed_inline), FadeOut(embed_note), FadeOut(divider),
+            FadeOut(sem_axes), FadeOut(sem_title),
+            FadeOut(dot_g), FadeOut(dot_c), FadeOut(dot_m),
+            FadeOut(lbl_g), FadeOut(lbl_c), FadeOut(lbl_m), FadeOut(prox),
+            run_time=0.6,
         )
 
-        # ══════════════════════════════════════════════
-        # SEÇÃO 2 — ÁUDIO → MATRIZ DE FREQUÊNCIAS
-        # ══════════════════════════════════════════════
-        sec2 = Text("Áudio → Matriz de Frequências", font_size=24, color=CYAN_C)
-        sec2.next_to(title, DOWN, buff=0.35)
-        self.play(Write(sec2), run_time=0.6)
+        # ══ SEÇÃO 2 — ÁUDIO → ESPECTROGRAMA ══════════════════
 
-        # Onda sonora
-        wave_axes = Axes(
+        sec2 = Text("Áudio  →  Espectrograma", font_size=24, color=CYAN_C)
+        sec2.next_to(title, DOWN, buff=0.3)
+        self.play(Write(sec2), run_time=0.5)
+
+        # ── Onda (esquerda) — posiciona ANTES de plotar ───────
+        wave_ax = Axes(
             x_range=[0, 4 * PI, PI],
             y_range=[-1.5, 1.5, 1],
-            x_length=5.5, y_length=2.0,
+            x_length=3.0, y_length=1.8,
             axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.5},
-        ).move_to([-3.0, 0.5, 0])
+        ).move_to([-4.2, 0.0, 0])
 
-        wave_curve = wave_axes.plot(
+        # plot DEPOIS de move_to para curva alinhar com os eixos
+        wave_curve = wave_ax.plot(
             lambda x: np.sin(x) + 0.5 * np.sin(3 * x),
             color=CYAN_C, stroke_width=2.5,
         )
-        wave_lbl = Text("sinal de áudio", font_size=16, color=GRAY_C)
-        wave_lbl.next_to(wave_axes, DOWN, buff=0.2)
+        wave_lbl = Text("sinal de áudio", font_size=14, color=GRAY_C)
+        wave_lbl.next_to(wave_ax, DOWN, buff=0.15)
 
-        self.play(Create(wave_axes), Create(wave_curve))
-        self.play(FadeIn(wave_lbl))
-        self.wait(0.4)
+        # ── Etapas de processamento (centro) ──────────────────
+        step_box = VGroup(
+            Text("① amostragem (kHz)",    font_size=16, color=YELLOW_C),
+            Text("② Transformada Fourier", font_size=16, color=YELLOW_C),
+        ).arrange(DOWN, buff=0.35).move_to([0.0, 0.0, 0])
 
-        # Setas: amostrar → Fourier
-        step1 = Text("① amostrar (kHz)", font_size=18, color=YELLOW_C)
-        step2 = Text("② Transformada de Fourier", font_size=18, color=YELLOW_C)
-        steps = VGroup(step1, step2).arrange(DOWN, buff=0.3).move_to([0.0, 0.3, 0])
+        # ── Espectrograma (direita) ───────────────────────────
+        freq_mat = Matrix(
+            [[1, 3, 0], [0, 5, 4], [2, 1, 6]],
+            h_buff=0.72, v_buff=0.65,
+        ).scale(0.60).move_to([4.2, 0.0, 0])
 
-        arr1 = Arrow(wave_axes.get_right() + RIGHT * 0.15,
-                     steps.get_left()      + LEFT  * 0.15,
-                     color=GRAY_C, buff=0, stroke_width=2)
+        freq_lbl = Text("espectrograma\n(freq × tempo)", font_size=14, color=GRAY_C)
+        freq_lbl.next_to(freq_mat, DOWN, buff=0.15)
 
-        self.play(GrowArrow(arr1), FadeIn(steps))
-        self.wait(0.4)
+        # Setas calculadas DEPOIS do posicionamento de todos os objetos
+        arr1 = Arrow(
+            wave_ax.get_right() + RIGHT * 0.15,
+            step_box.get_left() + LEFT  * 0.15,
+            color=GRAY_C, buff=0, stroke_width=2.5,
+        )
+        arr2 = Arrow(
+            step_box.get_right() + RIGHT * 0.15,
+            freq_mat.get_left()  + LEFT  * 0.15,
+            color=GRAY_C, buff=0, stroke_width=2.5,
+        )
 
-        # Matriz de espectrograma (representação visual simples)
-        freq_matrix = Matrix(
-            [[1, 3, 0, 2], [0, 5, 4, 1], [2, 1, 6, 3]],
-            h_buff=0.7, v_buff=0.65,
-        ).scale(0.6).move_to([3.8, 0.3, 0])
-
-        freq_lbl = Text("espectrograma\n(freq × tempo)", font_size=15, color=GRAY_C)
-        freq_lbl.next_to(freq_matrix, DOWN, buff=0.2)
-
-        arr2 = Arrow(steps.get_right() + RIGHT * 0.15,
-                     freq_matrix.get_left() + LEFT * 0.15,
-                     color=GRAY_C, buff=0, stroke_width=2)
-
-        self.play(GrowArrow(arr2), Create(freq_matrix))
-        self.play(FadeIn(freq_lbl))
+        self.play(Create(wave_ax), Create(wave_curve), FadeIn(wave_lbl))
+        self.play(GrowArrow(arr1), FadeIn(step_box))
+        self.play(GrowArrow(arr2), Create(freq_mat), FadeIn(freq_lbl))
         self.wait(1.2)
 
         self.play(
             FadeOut(title), FadeOut(sec2),
-            FadeOut(wave_axes), FadeOut(wave_curve), FadeOut(wave_lbl),
-            FadeOut(arr1), FadeOut(steps), FadeOut(arr2),
-            FadeOut(freq_matrix), FadeOut(freq_lbl),
+            FadeOut(wave_ax), FadeOut(wave_curve), FadeOut(wave_lbl),
+            FadeOut(arr1), FadeOut(step_box), FadeOut(arr2),
+            FadeOut(freq_mat), FadeOut(freq_lbl),
             run_time=0.8,
         )
 
@@ -1136,42 +1143,43 @@ class SimilarityMetrics(Scene):
             background_line_style={"stroke_color": BLUE_E, "stroke_opacity": 0.25},
             axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.6},
             x_range=[-4, 4], y_range=[-3, 3],
-        ).scale(0.72).move_to([0, -0.6, 0])
+        ).scale(0.72).move_to([0, -0.9, 0]).set_z_index(-1)
         self.play(Create(plane1), run_time=1.0)
 
-        a_end = np.array([-2.0,  1.5, 0])
-        b_end = np.array([ 1.8, -0.8, 0])
+        # Converter coordenadas do plano → mundo
+        a_end = plane1.c2p(-2.0,  1.5)
+        b_end = plane1.c2p( 1.8, -0.8)
 
-        dot_a = Dot(a_end, color=BLUE_C,  radius=0.12)
-        dot_b = Dot(b_end, color=GREEN_C, radius=0.12)
-        lbl_a = MathTex("A", color=BLUE_C,  font_size=30).next_to(dot_a, UL, buff=0.1)
-        lbl_b = MathTex("B", color=GREEN_C, font_size=30).next_to(dot_b, DR, buff=0.1)
+        dot_a = Dot(a_end, color=BLUE_C,  radius=0.12).set_z_index(3)
+        dot_b = Dot(b_end, color=GREEN_C, radius=0.12).set_z_index(3)
+        lbl_a = MathTex("A", color=BLUE_C,  font_size=30).next_to(dot_a, UL, buff=0.1).set_z_index(4)
+        lbl_b = MathTex("B", color=GREEN_C, font_size=30).next_to(dot_b, DR, buff=0.1).set_z_index(4)
 
-        # Linha de distância
-        dist_line = Line(a_end, b_end, color=YELLOW_C, stroke_width=3)
-        dist_brace = BraceBetweenPoints(a_end, b_end, direction=UP * 0.5, color=YELLOW_C)
-        dist_label = MathTex("d", color=YELLOW_C, font_size=28)
-        dist_label.next_to(dist_brace, UP, buff=0.1)
+        # Linha de distância com label no meio
+        dist_line = Line(a_end, b_end, color=YELLOW_C, stroke_width=3).set_z_index(2)
+        mid_pt = (np.array(a_end) + np.array(b_end)) / 2
+        perp = np.array([-(b_end[1] - a_end[1]), b_end[0] - a_end[0], 0])
+        perp = perp / np.linalg.norm(perp) * 0.3
+        dist_label = MathTex("d", color=YELLOW_C, font_size=28).move_to(mid_pt + perp).set_z_index(4)
 
         self.play(FadeIn(dot_a), FadeIn(dot_b), Write(lbl_a), Write(lbl_b))
-        self.play(Create(dist_line))
-        self.play(Create(dist_brace), Write(dist_label))
+        self.play(Create(dist_line), Write(dist_label))
 
         euc_formula = MathTex(
             r"d = \sqrt{\sum_{i}(a_i - b_i)^2}",
-            font_size=34, color=WHITE,
-        ).to_corner(DR, buff=0.6)
+            font_size=28, color=WHITE,
+        ).to_corner(DR, buff=0.5).set_z_index(5)
         self.play(Write(euc_formula))
 
         use1 = Text("→ agrupamento de clientes\n→ detecção de anomalias\n→ classificação por medidas",
-                    font_size=17, color=GRAY_C).to_corner(DL, buff=0.5)
+                    font_size=16, color=GRAY_C).to_corner(DL, buff=0.4).set_z_index(5)
         self.play(FadeIn(use1))
         self.wait(0.8)
 
         self.play(
             FadeOut(plane1), FadeOut(dot_a), FadeOut(dot_b),
             FadeOut(lbl_a), FadeOut(lbl_b), FadeOut(dist_line),
-            FadeOut(dist_brace), FadeOut(dist_label),
+            FadeOut(dist_label),
             FadeOut(euc_formula), FadeOut(use1), FadeOut(sec1),
             run_time=0.8,
         )
@@ -1183,40 +1191,46 @@ class SimilarityMetrics(Scene):
         sec2.next_to(title, DOWN, buff=0.3)
         self.play(Write(sec2))
 
+        # Plano limitado, mesmo estilo da seção 1, z_index baixo para não cobrir texto
         plane2 = NumberPlane(
             background_line_style={"stroke_color": BLUE_E, "stroke_opacity": 0.25},
             axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.6},
-        )
+            x_range=[-4, 4], y_range=[-3, 3],
+        ).scale(0.72).move_to([0, -0.8, 0]).set_z_index(-1)
+
+        # Fórmula abaixo de sec2 para não sobrepor o título
         cos_formula = MathTex(
             r"\cos(\theta) = \frac{\vec{A} \cdot \vec{B}}{\|\vec{A}\|\,\|\vec{B}\|}",
-            font_size=36, color=WHITE,
-        ).to_edge(UP, buff=0.45)
+            font_size=30, color=WHITE,
+        ).next_to(sec2, DOWN, buff=0.25).set_z_index(5)
 
         self.play(Create(plane2), run_time=1.0)
         self.play(Write(cos_formula), run_time=0.8)
 
-        a2_end = [4, 1.5, 0]
-        b2_end = [2, 3.5, 0]
+        # Vetores com origem no centro do plano (world coords)
+        origin = plane2.get_center()
+        a2_end = origin + np.array([ 2.5,  1.0, 0])
+        b2_end = origin + np.array([ 1.0,  2.5, 0])
 
-        vec_a = Vector(a2_end, color=BLUE_C,  stroke_width=5)
-        vec_b = Vector(b2_end, color=GREEN_C, stroke_width=5)
-        lbl_va = MathTex(r"\vec{A}", color=BLUE_C,  font_size=34).next_to(vec_a.get_end(), RIGHT, buff=0.15)
-        lbl_vb = MathTex(r"\vec{B}", color=GREEN_C, font_size=34).next_to(vec_b.get_end(), UR,    buff=0.15)
+        vec_a = Vector(a2_end - origin, color=BLUE_C,  stroke_width=5).shift(origin)
+        vec_b = Vector(b2_end - origin, color=GREEN_C, stroke_width=5).shift(origin)
+        lbl_va = MathTex(r"\vec{A}", color=BLUE_C,  font_size=34).next_to(vec_a.get_end(), RIGHT, buff=0.15).set_z_index(5)
+        lbl_vb = MathTex(r"\vec{B}", color=GREEN_C, font_size=34).next_to(vec_b.get_end(), UR,    buff=0.15).set_z_index(5)
 
         self.play(GrowArrow(vec_a), Write(lbl_va))
         self.play(GrowArrow(vec_b), Write(lbl_vb))
 
-        # Ângulo
-        line_a = Line(ORIGIN, a2_end)
-        line_b = Line(ORIGIN, b2_end)
-        angle  = Angle(line_a, line_b, radius=1.0, color=YELLOW_C)
+        # Ângulo entre os vetores
+        line_a = Line(origin, a2_end)
+        line_b = Line(origin, b2_end)
+        angle  = Angle(line_a, line_b, radius=0.8, color=YELLOW_C).set_z_index(4)
 
-        mid_dir = (
-            np.array(a2_end) / np.linalg.norm(a2_end) +
-            np.array(b2_end) / np.linalg.norm(b2_end)
-        )
-        mid_dir = mid_dir / np.linalg.norm(mid_dir) * 1.45
-        theta_lbl = MathTex(r"\theta", color=YELLOW_C, font_size=30).move_to(mid_dir)
+        a_dir = (a2_end - origin) / np.linalg.norm(a2_end - origin)
+        b_dir = (b2_end - origin) / np.linalg.norm(b2_end - origin)
+        mid_dir = (a_dir + b_dir) / np.linalg.norm(a_dir + b_dir)
+        theta_lbl = MathTex(r"\theta", color=YELLOW_C, font_size=30).move_to(
+            origin + mid_dir * 1.1
+        ).set_z_index(5)
 
         self.play(Create(angle), Write(theta_lbl))
         self.wait(0.6)
@@ -1230,15 +1244,15 @@ class SimilarityMetrics(Scene):
         )
 
         cases = VGroup(
-            Text('θ ≈ 0°    →  cos = 1    →  textos idênticos',    font_size=24, color=GREEN_C),
-            Text('θ ≈ 90°   →  cos = 0    →  sem relação',         font_size=24, color=YELLOW_C),
-            Text('θ ≈ 180°  →  cos = −1   →  totalmente opostos',  font_size=24, color=RED),
-        ).arrange(DOWN, buff=0.5, aligned_edge=LEFT)
+            Text('θ ≈ 0°    →  cos = 1    →  textos idênticos',   font_size=22, color=GREEN_C),
+            Text('θ ≈ 90°   →  cos = 0    →  sem relação',        font_size=22, color=YELLOW_C),
+            Text('θ ≈ 180°  →  cos = −1   →  totalmente opostos', font_size=22, color=RED),
+        ).arrange(DOWN, buff=0.4, aligned_edge=LEFT).next_to(cos_formula, DOWN, buff=0.45)
 
         use2 = Text(
             "→ busca semântica   → recomendação   → grandes modelos de linguagem",
-            font_size=18, color=GRAY_C,
-        ).next_to(cases, DOWN, buff=0.5)
+            font_size=17, color=GRAY_C,
+        ).next_to(cases, DOWN, buff=0.4)
 
         self.play(
             LaggedStart(*[Write(c) for c in cases], lag_ratio=0.4),
