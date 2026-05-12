@@ -1,465 +1,130 @@
 # Álgebra Linear Aplicada ao Machine Learning
 
-### Disciplina
-
-Matemática Discreta
-
-### Objetivo Acadêmico
-
-Este repositório contém o desenvolvimento técnico e visual de uma apresentação acadêmica em vídeo sobre o tema **Álgebra Linear aplicada ao Machine Learning**, com foco na relação entre estruturas algébricas estudadas em matemática discreta e sua aplicação prática em sistemas modernos de inteligência artificial.
-
-O trabalho foi desenvolvido para demonstrar, de forma visual, intuitiva e computacionalmente ilustrada, como conceitos fundamentais da álgebra linear constituem a base matemática de algoritmos de aprendizado de máquina.
+**Disciplina:** Matemática Discreta  
+**Universidade Federal de Goiás**  
+**Duração total:** ~12 min 45 s
 
 ---
 
-# Proposta da Apresentação
+## Apresentadoras
 
-A apresentação tem duração aproximada de **15 minutos** e busca responder à pergunta central:
+| Nome | Bloco |
+|---|---|
+| Milena Oliveira Penhalves | Introdução e Estruturas Fundamentais |
+| Giovanna Borges Basso | Operações e Conceitos Centrais |
+| Júlia Santos Coité | Redes Neurais, SVD e Conclusão |
+
+---
+
+## Sobre o Projeto
+
+Apresentação acadêmica em vídeo que responde à pergunta:
 
 > Como sistemas de Machine Learning conseguem transformar dados brutos em decisões inteligentes?
 
-A resposta é construída a partir da demonstração de que computadores não interpretam diretamente imagens, textos, sons ou vídeos.
-
-Todo dado precisa ser convertido em representações matemáticas manipuláveis.
-
-Essa conversão é viabilizada por estruturas da álgebra linear.
+A narrativa demonstra que toda IA moderna depende diretamente da álgebra linear — da representação dos dados até o treinamento de redes neurais.
 
 ---
 
-# Base Conceitual
+## Cenas
 
-A narrativa técnica da apresentação está fundamentada em três ideias centrais:
+| # | Classe Manim | Arquivo | Apresentadora | Duração |
+|---|---|---|---|---|
+| 1 | `Intro` | `Intro.mp4` | Milena | ≈ 1 min 30 s |
+| 2 | `ScalarsAndTensors` | `ScalarsAndTensors.mp4` | Milena | ≈ 2 min 30 s |
+| 3 | `ImageToMatrix` | `ImageToMatrix.mp4` | Giovanna | ≈ 55 s |
+| 4 | `TextAudioVectorization` | `TextAudioVectorization.mp4` | Giovanna | ≈ 50 s |
+| 5 | `SimilarityMetrics` | `SimilarityMetrics.mp4` | Giovanna | ≈ 1 min 30 s |
+| 6 | `LinearTransformationExample` | `LinearTransformationExample.mp4` | Giovanna | ≈ 1 min |
+| 7 | `NeuralNetwork` | `NeuralNetwork.mp4` | Júlia | ≈ 1 min 45 s |
+| 8 | `SVDScene` | `SVDScene.mp4` | Júlia | ≈ 1 min 15 s |
+| 9 | `Conclusion` | `Conclusion.mp4` | Júlia | ≈ 1 min 30 s |
 
-## 1. Representação Matemática dos Dados
-
-Todo dado computacional pode ser expresso como:
-
-* Escalares
-* Vetores
-* Matrizes
-* Tensores
-
-Essas estruturas permitem que algoritmos realizem processamento matemático sobre informações complexas.
-
----
-
-## 2. Operações Algébricas como Mecanismo Computacional
-
-O processamento interno de modelos de ML depende de operações como:
-
-* Produto interno
-* Multiplicação matricial
-* Transformações lineares
-* Cálculo de distâncias vetoriais
-* Similaridade angular
+Os vídeos renderizados ficam em `media/videos/main/1080p60/`.
 
 ---
 
-## 3. Redução e Organização da Informação
+## Estrutura do Repositório
 
-Métodos como decomposição matricial permitem:
-
-* compressão de dados
-* extração de padrões
-* redução dimensional
-* aumento de eficiência computacional
-
----
-
-# Referência Técnica
-
-A estrutura narrativa foi inspirada em conteúdos educacionais da IBM sobre fundamentos matemáticos de Machine Learning.
-
-A apresentação adota uma abordagem visual semelhante a:
-
-* IBM Learning
-* 3Blue1Brown
-* visualizações matemáticas computacionais
-* animações educacionais baseadas em álgebra linear
-
----
-
-# Tecnologias Utilizadas
-
-## Linguagem
-
-Python 3.11+
-
----
-
-## Biblioteca principal
-
-Manim Community Edition
-
-Responsável pela geração das animações matemáticas.
-
-Uso principal:
-
-* visualização vetorial
-* transformações lineares
-* animações matriciais
-* ilustrações geométricas
-
----
-
-## Dependências auxiliares
-
-### MiKTeX
-
-Necessário para renderização de expressões LaTeX.
-
-Utilizado em:
-
-* MathTex
-* Matrix
-* fórmulas matemáticas
-
----
-
-### FFmpeg
-
-Necessário para renderização e exportação de vídeo.
-
----
-
-## Edição final
-
-Opcionalmente:
-
-* CapCut
-* DaVinci Resolve
-* Adobe Premiere
-
----
-
-# Estrutura do Repositório
-
-```text
-projeto_video/
-│
-├── main.py
-├── CLAUDE.md
+```
+linear-algebraML/
+├── main.py               # todas as cenas Manim
+├── roteiro.md            # roteiro completo com falas e tempos
+├── requirements.txt      # dependências Python
+├── manim.cfg             # configuração padrão (quality = high_quality)
 ├── assets/
-│   ├── imagens
-│   └── referências visuais
-│
-├── media/
-│   └── renders gerados
-│
-└── videos/
-    └── composição final
+│   ├── cat.jpg           # usada na Intro e TextAudioVectorization
+│   ├── dog.jpg           # usada na Intro e TextAudioVectorization
+│   └── image.jpg         # usada na ImageToMatrix
+├── docs/
+│   └── *.pdf             # referências e roteiro original
+└── media/
+    └── videos/main/
+        └── 1080p60/      # vídeos finais renderizados
 ```
 
 ---
 
-# Arquitetura das Animações
+## Tecnologias
 
-A apresentação é dividida em cenas independentes.
-
-Cada cena representa um conceito matemático específico.
-
----
-
-# Cena 1 — Introdução
-
-## Objetivo
-
-Apresentar o problema motivador.
-
-Pergunta central:
-
-> Como uma IA diferencia um gato de um cachorro?
-
-## Conceito abordado
-
-Necessidade de representação matemática dos dados.
-
-## Elementos visuais
-
-* título animado
-* transição tecnológica
-* introdução narrativa
+| Ferramenta | Uso |
+|---|---|
+| Python 3.11+ | linguagem principal |
+| Manim Community Edition | geração das animações |
+| MiKTeX | renderização de LaTeX (MathTex, fórmulas) |
+| FFmpeg | exportação de vídeo |
+| CapCut / DaVinci / Premiere | edição final (opcional) |
 
 ---
 
-# Cena 2 — Vetores
-
-## Objetivo
-
-Introduzir vetores como representação de características.
-
-## Conceitos matemáticos
-
-* espaço vetorial
-* magnitude
-* direção
-* representação geométrica
-
-## Aplicação em ML
-
-Embeddings e feature vectors.
-
-## Animações
-
-* plano cartesiano
-* vetores surgindo dinamicamente
-* comparação angular
-
----
-
-# Cena 3 — Matrizes
-
-## Objetivo
-
-Mostrar como grandes conjuntos de dados são organizados.
-
-## Conceitos matemáticos
-
-* linhas e colunas
-* organização matricial
-* estrutura algébrica bidimensional
-
-## Aplicação em ML
-
-* datasets
-* pesos de redes neurais
-* imagens digitalizadas
-
-## Efeito visual
-
-Construção progressiva da matriz.
-
----
-
-# Cena 4 — Imagem para Matriz
-
-## Objetivo
-
-Demonstrar vetorização visualmente.
-
-## Processo ilustrado
-
-Imagem → Pixels → Valores numéricos → Matriz
-
-## Importância conceitual
-
-Explica como computadores interpretam imagens.
-
----
-
-# Cena 5 — Similaridade Vetorial
-
-## Objetivo
-
-Mostrar como algoritmos medem semelhança.
-
-## Fórmula principal
-
-Cosine Similarity
-
-## Aplicações
-
-* NLP
-* embeddings semânticos
-* recomendação de conteúdo
-* busca vetorial
-
-## Elementos animados
-
-* vetores com diferentes ângulos
-* arco angular
-* aproximação vetorial
-
----
-
-# Cena 6 — Transformações Lineares
-
-## Objetivo
-
-Visualizar ação de matrizes sobre espaços vetoriais.
-
-## Conceitos matemáticos
-
-* transformação linear
-* cisalhamento
-* rotação
-* escala
-
-## Aplicação em ML
-
-Transformações internas em redes neurais.
-
-## Visualização
-
-Deformação da grade cartesiana.
-
----
-
-# Cena 7 — Rede Neural
-
-## Objetivo
-
-Relacionar álgebra linear ao fluxo computacional real.
-
-## Fórmula central
-
-Y = WX + b
-
-## Interpretação
-
-* X → entrada
-* W → matriz de pesos
-* b → viés
-* Y → saída
-
-## Visualização
-
-* neurônios conectados
-* fluxo propagado
-* representação matricial
-
----
-
-# Cena 8 — Decomposição SVD
-
-## Objetivo
-
-Apresentar redução dimensional.
-
-## Fórmula
-
-A = UΣVᵀ
-
-## Conceitos trabalhados
-
-* fatoração matricial
-* compressão de informação
-* extração de componentes relevantes
-
-## Aplicações práticas
-
-* sistemas de recomendação
-* compressão
-* embeddings compactos
-
-## Visualização
-
-Matriz se decompondo em três estruturas menores.
-
----
-
-# Cena 9 — Conclusão
-
-## Mensagem final
-
-Dados → Matemática → Inteligência
-
-A cena reforça a tese principal:
-
-> A inteligência artificial moderna depende diretamente da álgebra linear.
-
----
-
-# Diretrizes Visuais
-
-## Paleta recomendada
-
-* azul marinho
-* ciano
-* branco
-* roxo escuro
-
----
-
-## Estilo gráfico
-
-Inspirado em visualizações científicas modernas.
-
-Características:
-
-* fundo escuro
-* contraste alto
-* animações suaves
-* minimalismo técnico
-
----
-
-# Objetivo Pedagógico
-
-A apresentação busca:
-
-## Demonstrar interdisciplinaridade
-
-Conectar matemática discreta com ciência da computação.
-
-## Tornar abstrações visuais
-
-Facilitar compreensão intuitiva.
-
-## Mostrar aplicação real
-
-Evidenciar uso industrial da matemática.
-
-## Relacionar teoria e prática
-
-Apresentar como estruturas algébricas sustentam sistemas modernos.
-
----
-
-# Público-Alvo
-
-* professor da disciplina
-* colegas de graduação
-* estudantes com conhecimento básico de matemática discreta
-
----
-
-# Resultado Esperado
-
-Ao final da apresentação, espera-se que o espectador compreenda que:
-
-1. Dados precisam ser matematicamente representados
-2. Álgebra linear estrutura essa representação
-3. Operações matriciais executam processamento
-4. Machine Learning depende diretamente dessas estruturas
-
----
-
-# Comandos de Renderização
-
-Renderização individual:
+## Instalação
 
 ```bash
-manim -pqh main.py NomeDaCena
+pip install -r requirements.txt
 ```
 
-Renderização rápida:
+MiKTeX e FFmpeg precisam ser instalados separadamente no sistema.
 
+---
+
+## Renderização
+
+O arquivo `manim.cfg` já configura a qualidade como 1080p60 por padrão.
+
+**Renderizar uma cena:**
 ```bash
-manim -pql main.py NomeDaCena
+manim main.py NomeDaCena
+```
+
+**Forçar qualidade explicitamente:**
+```bash
+manim -qh main.py NomeDaCena   # 1080p60
+manim -ql main.py NomeDaCena   # 480p15 (rascunho)
+```
+
+**Renderizar todas as cenas:**
+```bash
+manim main.py Intro
+manim main.py ScalarsAndTensors
+manim main.py ImageToMatrix
+manim main.py TextAudioVectorization
+manim main.py SimilarityMetrics
+manim main.py LinearTransformationExample
+manim main.py NeuralNetwork
+manim main.py SVDScene
+manim main.py Conclusion
 ```
 
 ---
 
-# Observações de Desenvolvimento
+## Paleta de Cores
 
-Este projeto prioriza:
-
-* clareza conceitual
-* fidelidade matemática
-* estética visual profissional
-* didática acessível
-
-Não busca formalismo matemático excessivo.
-
-O foco é visualização aplicada.
-
----
-
-# Síntese Final
-
-Este repositório demonstra como estruturas algébricas deixam de ser abstrações formais e tornam-se ferramentas fundamentais para construção de sistemas inteligentes.
-
-A apresentação mostra que a álgebra linear não é apenas teoria matemática.
-
-Ela é a linguagem operacional da inteligência artificial contemporânea.
+| Variável | Hex | Uso |
+|---|---|---|
+| `BG` | `#0D0D1A` | fundo escuro |
+| `CYAN_C` | `#00D4FF` | destaques principais |
+| `BLUE_C` | `#1E90FF` | vetores e geometria |
+| `GREEN_C` | `#39D353` | segundo vetor / confirmações |
+| `YELLOW_C` | `#FFD700` | ângulos e destaques |
+| `PURPLE_C` | `#BB86FC` | fórmulas e rede neural |
+| `GRAY_C` | `#8888AA` | textos secundários |
