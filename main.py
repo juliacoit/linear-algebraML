@@ -116,8 +116,12 @@ class Intro(Scene):
             font_size=44,
             color=CYAN_C,
             line_spacing=1.5,
-        )
+        ).move_to(UP * 1.0)
         self.play(Write(question), run_time=2.2)
+
+        cat_img = ImageMobject("assets/cat.jpg").scale_to_fit_width(2.8).move_to(LEFT * 2.8 + DOWN * 1.4)
+        dog_img = ImageMobject("assets/dog.jpg").scale_to_fit_width(2.8).move_to(RIGHT * 2.8 + DOWN * 1.4)
+        self.play(FadeIn(cat_img), FadeIn(dog_img), run_time=0.8)
 
         # cursor piscando
         cursor = Rectangle(
@@ -129,7 +133,7 @@ class Intro(Scene):
         self.play(FadeIn(cursor),  run_time=0.35)
         self.wait(0.6)
 
-        self.play(FadeOut(question), FadeOut(cursor), run_time=0.8)
+        self.play(FadeOut(question), FadeOut(cursor), FadeOut(cat_img), FadeOut(dog_img), run_time=0.8)
 
         # ── 5 bullets ─────────────────────────────────────────
         bullets_data = [
@@ -181,16 +185,12 @@ class ImageToMatrix(Scene):
         title.to_edge(UP, buff=0.5)
         self.play(Write(title), run_time=1.0)
 
-        # ── "Imagem" representada como quadrado ──────────────
-        image_rect = Square(
-            side_length=3.2, color=BLUE_C,
-            fill_color=BLUE_C, fill_opacity=0.85,
-        )
-        pixel_label = Text("Imagem\n(pixels)", font_size=22, color=WHITE)
-        pixel_label.move_to(image_rect)
-        image_group = VGroup(image_rect, pixel_label)
+        # ── Imagem real ───────────────────────────────────────
+        real_img = ImageMobject("assets/image.jpg").scale_to_fit_width(3.2)
+        pixel_label = Text("Imagem (pixels)", font_size=22, color=GRAY_C)
+        pixel_label.next_to(real_img, DOWN, buff=0.25)
 
-        self.play(FadeIn(image_group, scale=0.85), run_time=0.8)
+        self.play(FadeIn(real_img, scale=0.85), FadeIn(pixel_label), run_time=0.8)
         self.wait(0.8)
 
         # ── Transformação: imagem → valores numéricos ────────
@@ -200,9 +200,11 @@ class ImageToMatrix(Scene):
         ).set_color(WHITE).scale(0.85)
 
         self.play(
-            ReplacementTransform(image_group, matrix),
-            run_time=1.5,
+            FadeOut(real_img, shift=DOWN * 0.3),
+            FadeOut(pixel_label),
+            run_time=0.6,
         )
+        self.play(FadeIn(matrix, shift=UP * 0.3), run_time=0.8)
         self.wait(0.5)
 
         # ── Destaque nos valores de pixel ────────────────────
@@ -781,9 +783,10 @@ class TextAudioVectorization(Scene):
         dot_c = Dot(sem_axes.c2p( 1.0,  0.4), color=GREEN_C, radius=0.10)
         dot_m = Dot(sem_axes.c2p(-1.2, -1.0), color=RED,     radius=0.10)
 
-        lbl_g = Text("gato",     font_size=13, color=BLUE_C ).next_to(dot_g, UR, buff=0.05)
-        lbl_c = Text("cachorro", font_size=13, color=GREEN_C).next_to(dot_c, DR, buff=0.05)
-        lbl_m = Text("mesa",     font_size=13, color=RED    ).next_to(dot_m, DL, buff=0.05)
+        # imagens substituem labels de texto para gato e cachorro no espaço semântico
+        cat_dot_img = ImageMobject("assets/cat.jpg").scale_to_fit_width(0.48).next_to(dot_g, UR, buff=0.05)
+        dog_dot_img = ImageMobject("assets/dog.jpg").scale_to_fit_width(0.48).next_to(dot_c, DR, buff=0.05)
+        lbl_m = Text("mesa", font_size=13, color=RED).next_to(dot_m, DL, buff=0.05)
 
         prox = DashedLine(dot_g.get_center(), dot_c.get_center(),
                           color=YELLOW_C, dash_length=0.12)
@@ -791,6 +794,7 @@ class TextAudioVectorization(Scene):
         # ── Pipeline esquerda: palavra → seta → embedding ────
         # Todos os elementos posicionados relativamente entre si
         word = Text('"gato"', font_size=36, color=WHITE).move_to([-4.8, 0.3, 0])
+        cat_word_img = ImageMobject("assets/cat.jpg").scale_to_fit_width(1.6).next_to(word, DOWN, buff=0.2)
 
         arr_e = Arrow(
             word.get_right() + RIGHT * 0.2,
@@ -813,23 +817,24 @@ class TextAudioVectorization(Scene):
         )
 
         self.play(Write(word))
+        self.play(FadeIn(cat_word_img))
         self.play(GrowArrow(arr_e))
         self.play(Write(embed_inline))
         self.play(FadeIn(embed_note))
         self.play(Create(divider), Create(sem_axes), FadeIn(sem_title))
         self.play(
             FadeIn(dot_g), FadeIn(dot_c), FadeIn(dot_m),
-            FadeIn(lbl_g), FadeIn(lbl_c), FadeIn(lbl_m),
+            FadeIn(cat_dot_img), FadeIn(dog_dot_img), FadeIn(lbl_m),
         )
         self.play(Create(prox))
         self.wait(0.8)
 
         self.play(
-            FadeOut(sec1), FadeOut(word), FadeOut(arr_e),
+            FadeOut(sec1), FadeOut(word), FadeOut(cat_word_img), FadeOut(arr_e),
             FadeOut(embed_inline), FadeOut(embed_note), FadeOut(divider),
             FadeOut(sem_axes), FadeOut(sem_title),
             FadeOut(dot_g), FadeOut(dot_c), FadeOut(dot_m),
-            FadeOut(lbl_g), FadeOut(lbl_c), FadeOut(lbl_m), FadeOut(prox),
+            FadeOut(cat_dot_img), FadeOut(dog_dot_img), FadeOut(lbl_m), FadeOut(prox),
             run_time=0.6,
         )
 
