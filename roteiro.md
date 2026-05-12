@@ -10,9 +10,9 @@
 
 | Sigla | Nome                     | Bloco                                          |
 |-------|--------------------------|------------------------------------------------|
-| **J** | Júlia Santos Coité       | Introdução e Estruturas Fundamentais (~4 min)  |
+| **M** | Milena Oliveira Penhalves| Introdução e Estruturas Fundamentais (~4 min)  |
 | **G** | Giovanna Borges Basso    | Operações e Conceitos Centrais (~4 min)        |
-| **M** | Milena Oliveira Penhalves| Redes Neurais, SVD, Aplicações e Conclusão (~4 min) |
+| **J** | Júlia Santos Coité       | Redes Neurais, SVD, Aplicações e Conclusão (~4 min) |
 
 ---
 
@@ -20,21 +20,21 @@
 
 | Apresentadora | Trecho                              | Tempo alvo    | Cena Manim                  |
 |---------------|-------------------------------------|---------------|-----------------------------|
-| Júlia         | Abertura e por que álgebra linear   | ≈ 1 min 30 s  | `Intro`                     |
-| Júlia         | Escalar, vetor, matriz, tensor      | ≈ 2 min 30 s  | `ScalarsAndTensors`         |
+| Milena        | Abertura e por que álgebra linear   | ≈ 1 min 30 s  | `Intro`                     |
+| Milena        | Escalar, vetor, matriz, tensor      | ≈ 2 min 30 s  | `ScalarsAndTensors`         |
 | Giovanna      | Vetorização (imagem, texto, áudio)  | ≈ 1 min 45 s  | `ImageToMatrix` + `TextAudioVectorization` |
 | Giovanna      | Similaridade euclidiana e cosseno   | ≈ 1 min 30 s  | `SimilarityMetrics`         |
 | Giovanna      | Transformações lineares             | ≈ 1 min       | `LinearTransformationExample` |
-| Milena        | Redes neurais e Y = WX + b          | ≈ 1 min 45 s  | `NeuralNetwork`             |
-| Milena        | Redução de dimensionalidade (SVD)   | ≈ 1 min 15 s  | `SVDScene`                  |
-| Milena        | Aplicações reais e conclusão        | ≈ 1 min 30 s  | `Conclusion`                |
+| Júlia         | Redes neurais e Y = WX + b          | ≈ 1 min 45 s  | `NeuralNetwork`             |
+| Júlia         | Redução de dimensionalidade (SVD)   | ≈ 1 min 15 s  | `SVDScene`                  |
+| Júlia         | Aplicações reais e conclusão        | ≈ 1 min 30 s  | `Conclusion`                |
 | **Total**     |                                     | **≈ 12 min 45 s** |                         |
 
 ---
 
 ---
 
-# BLOCO 1 — JÚLIA SANTOS COITÉ
+# BLOCO 1 — MILENA OLIVEIRA PENHALVES
 ## Introdução e Estruturas Fundamentais | ~4 min
 
 ---
@@ -50,7 +50,7 @@
 **ANIMAÇÃO:**  
 `FadeIn(particles, lag_ratio=0.03)` — 90 pontos brancos surgem lentamente sobre o fundo `#0D0D1A`, como nós de uma rede.
 
-**J:**
+**M:**
 > "Quando você desbloqueia o celular pelo seu rosto, quando a Netflix sugere a próxima série antes mesmo de você procurar, quando o ChatGPT responde uma pergunta complexa em segundos — em todas essas situações há uma única disciplina matemática trabalhando por baixo dos panos."
 
 ---
@@ -61,7 +61,7 @@
 `Write(title_line1)` — "Álgebra Linear aplicada ao"  
 `Write(title_line2)` — "Machine Learning" (ciano bold)
 
-**J:**
+**M:**
 > "E essa disciplina é a álgebra linear."
 > "Pode parecer estranho que algo tão abstrato esteja por trás de tecnologias tão sofisticadas, mas o motivo é simples. Máquinas não entendem o mundo. Elas entendem números."
 
@@ -74,9 +74,9 @@
 `FadeIn(subtitle)` — "Como a matemática dá vida à IA"  
 `FadeIn(vec_group, mat_group, ang_group, nn_group)` — ícones nos 4 cantos
 
-**J:**
+**M:**
 > "E a álgebra linear é a ferramenta que transforma o mundo em números e os números em decisões inteligentes."
-> "Eu sou Júlia, e junto comigo estão Giovanna e Milena. O tema é álgebra linear aplicada ao Machine Learning."
+> "Eu sou Milena, e junto comigo estão Giovanna e Júlia. O tema é álgebra linear aplicada ao Machine Learning."
 
 ---
 
@@ -86,7 +86,7 @@
 `FadeOut(...)` de tudo.  
 `Write(question)` — "Como uma IA diferencia / um gato de um cachorro?" em ciano, com cursor piscando.
 
-**J:**
+**M:**
 > "Vamos começar pela pergunta mais importante: por que álgebra linear?"
 > "Todo sistema de aprendizado de máquina precisa fazer cinco coisas."
 
@@ -107,7 +107,7 @@ A pergunta central some. 5 itens surgem em `LaggedStart` com `FadeIn`:
 
 Cada item aparece com `Write`, numeração em ciano.
 
-**J:**
+**M:**
 > "Primeiro, representar dados de forma numérica. Segundo, organizar esses dados em estruturas. Terceiro, transformar essas estruturas para extrair informação útil. Quarto, comparar informações entre si para identificar padrões. E quinto, fazer tudo isso em uma escala que envolve milhões — em alguns casos, bilhões — de operações por segundo."
 
 ---
@@ -121,7 +121,7 @@ Os bullets somem com `FadeOut`. Uma linha surge:
 
 Em branco, `Write`.
 
-**J:**
+**M:**
 > "A álgebra linear é a única ferramenta matemática que faz as cinco coisas de maneira eficiente. Por isso ela não é uma escolha de design dos engenheiros. Ela é uma necessidade computacional. Sem álgebra linear, o Machine Learning moderno simplesmente não existiria."
 
 ---
@@ -139,7 +139,7 @@ Em branco, `Write`.
 `Write(sc_lbl)` + `Write(sc_val)` — "Escalar" e o número "3,7" em destaque  
 `FadeIn(sc_ex)` — exemplos: temperatura, probabilidade, taxa de aprendizado
 
-**J:**
+**M:**
 > "Agora, para entender como ela funciona na prática, precisamos conhecer suas estruturas básicas. Temos quatro: escalar, vetor, matriz e tensor."
 > "O escalar é a unidade mais simples. É apenas um número. Um único valor. A temperatura ambiente é um escalar. A probabilidade de uma previsão estar correta é um escalar. A taxa de aprendizado de um modelo — que define o quanto ele se ajusta a cada passo do treinamento — também é um escalar."
 
@@ -151,7 +151,7 @@ Em branco, `Write`.
 `Write(ve_lbl)` + `Create(ve_val)` — "Vetor" com a matriz coluna `[idade, altura, renda, ⋮]`  
 `FadeIn(ve_ex)` — "características de um objeto"
 
-**J:**
+**M:**
 > "Quando juntamos vários escalares em uma sequência ordenada, temos um vetor. E é aqui que as coisas ficam interessantes. Um vetor pode representar qualquer objeto descrito por características numéricas. Uma pessoa, por exemplo, pode ser representada pelo vetor idade, altura, renda. Três posições, três características."
 > "Mas você pode ter um vetor de cem posições para descrever um cliente de banco, ou um vetor de setecentas e sessenta e oito posições para representar o significado de uma palavra dentro de um modelo de linguagem moderno. Cada posição é uma característica, e o vetor inteiro descreve o objeto."
 
@@ -163,7 +163,7 @@ Em branco, `Write`.
 `Write(ma_lbl)` + `Create(ma_val)` — "Matriz" com a grade 3×3  
 `FadeIn(ma_ex)` — "conjunto de dados"
 
-**J:**
+**M:**
 > "Se um vetor descreve um objeto, uma matriz descreve um conjunto deles. Uma matriz é uma tabela bidimensional: linhas e colunas. Cada linha representa um objeto, cada coluna representa uma característica."
 > "Quando o Spotify armazena os hábitos musicais de milhões de usuários, ele guarda isso em uma matriz. Quando uma rede neural armazena o conhecimento que aprendeu, esse conhecimento está em matrizes que chamamos de matrizes de pesos. Imagens em escala de cinza também são matrizes, porque cada posição corresponde à intensidade luminosa de um pixel."
 
@@ -175,7 +175,7 @@ Em branco, `Write`.
 `Write(te_lbl)` + `FadeIn(te_stack)` — "Tensor" com 3 quadrados empilhados coloridos (R, G, B)  
 `FadeIn(rgb_lbl)` — "R  G  B  (3 canais)"
 
-**J:**
+**M:**
 > "E quando precisamos de algo ainda mais complexo, usamos tensores. Um tensor é a generalização da matriz para qualquer número de dimensões. Uma imagem colorida, por exemplo, é um tensor de três dimensões: largura, altura e três canais de cor — vermelho, verde e azul. Um vídeo é um tensor de quatro dimensões, porque adicionamos o tempo."
 > "Não é por acaso que as duas bibliotecas mais usadas no mundo para aprendizado profundo se chamam TensorFlow e PyTorch — toda operação dentro delas é, no fundo, uma operação sobre tensores."
 
@@ -188,7 +188,7 @@ Em branco, `Write`.
 `escalar → vetor → matriz → tensor`  
 cada palavra na sua cor (ciano, azul, verde, amarelo).
 
-**J:**
+**M:**
 > "Agora temos as estruturas. Sabemos como guardar a informação. O próximo passo é entender o que fazer com ela. E é sobre isso que a Giovanna vai falar."
 
 ---
@@ -213,7 +213,7 @@ A hierarquia da cena anterior some.
 Título "Vetorização de Dados" surge com `Write`.
 
 **G:**
-> "Obrigado, Júlia. Tudo o que vimos até agora — escalares, vetores, matrizes, tensores — assume que os dados já são números. Mas o mundo real não é assim. Uma foto não é um número. Uma palavra não é um número. Um som não é um número. Então surge a pergunta: como traduzir o mundo real para a álgebra linear? Esse processo de tradução se chama vetorização."
+> "Tudo o que vimos até agora — escalares, vetores, matrizes, tensores — assume que os dados já são números. Mas o mundo real não é assim. Uma foto não é um número. Uma palavra não é um número. Um som não é um número. Então surge a pergunta: como traduzir o mundo real para a álgebra linear? Esse processo de tradução se chama vetorização."
 
 ---
 
@@ -338,13 +338,13 @@ O vetor amarelo se move mostrando sua posição original em cinza (ghost vector)
 
 **G:**
 > "E por que isso importa? Porque cada camada de uma rede neural é, no fundo, uma transformação linear seguida de uma operação não linear. Os dados entram em um formato — uma foto, por exemplo — e, camada por camada, são transformados em representações cada vez mais úteis até chegarem ao formato final, que é a previsão."
-> "O aprendizado do qual tanto se fala em Machine Learning é, na prática, descobrir quais transformações lineares fazem essa tradução funcionar. E é exatamente sobre isso que a Milena vai falar a seguir."
+> "O aprendizado do qual tanto se fala em Machine Learning é, na prática, descobrir quais transformações lineares fazem essa tradução funcionar. E é exatamente sobre isso que a Júlia vai falar a seguir."
 
 ---
 
 ---
 
-# BLOCO 3 — MILENA OLIVEIRA PENHALVES
+# BLOCO 3 — JÚLIA SANTOS COITÉ
 ## Redes Neurais, SVD, Aplicações e Conclusão | ~4 min
 
 ---
@@ -363,7 +363,7 @@ O vetor amarelo se move mostrando sua posição original em cinza (ghost vector)
 `Create(layers)` — 3 camadas: entrada (3), oculta (4), saída (2)  
 `FadeIn(layer_labels)` — "Entrada (X)", "Camadas ocultas", "Saída (Y)"
 
-**M:**
+**J:**
 > "Obrigado, Giovanna. Tudo o que vimos até agora — estruturas, vetorização, similaridade, transformações — converge em uma única coisa: as redes neurais. E o coração de toda rede neural é uma equação muito simples: Y igual a W vezes X, mais b."
 > "Essa equação parece pequena, mas é a fórmula que move o mundo do aprendizado profundo. Vou destrinchar cada termo."
 
@@ -379,7 +379,7 @@ O vetor amarelo se move mostrando sua posição original em cinza (ghost vector)
 `Indicate(formula[0], YELLOW_C)` — Y em amarelo  
 `FadeIn(legend)` — caixa com legenda X/W/b/Y e seus significados
 
-**M:**
+**J:**
 > "X é a entrada. Pode ser o vetor que representa um cliente, os pixels de uma imagem, o embedding de uma palavra. Qualquer dado que queiramos processar vira X."
 > "W é a matriz de pesos. E é nessa matriz que mora todo o conhecimento que a rede aprendeu. Cada número dentro de W foi ajustado para fazer a rede tomar decisões corretas."
 > "b é o viés, do inglês bias. É um pequeno ajuste que dá flexibilidade à rede, permitindo que ela aprenda padrões que não passariam exatamente pela origem do espaço."
@@ -393,7 +393,7 @@ O vetor amarelo se move mostrando sua posição original em cinza (ghost vector)
 A rede e a fórmula somem.  
 `Write(closing)` — "Treinar uma rede neural = ajustar os valores de W"
 
-**M:**
+**J:**
 > "Quando multiplicamos W por X, estamos aplicando uma transformação linear nos dados de entrada. Quando somamos b, deslocamos o resultado. E esse processo se repete em cada camada da rede."
 > "Modelos modernos como o GPT-4 têm centenas de camadas com bilhões de parâmetros nessas matrizes W. O que significa treinar uma rede neural? Significa ajustar, repetidamente, os números dentro de cada matriz W até que a saída Y fique tão próxima quanto possível do resultado correto."
 > "Cada vez que você usa o ChatGPT, bilhões dessas operações estão acontecendo em frações de segundo."
@@ -412,7 +412,7 @@ A rede e a fórmula somem.
 `Write(title)` — "Decomposição SVD"  
 `Write(lbl_a)` + `Create(mat_a)` — A = [[5,3],[4,2]]
 
-**M:**
+**J:**
 > "Mas há um problema prático com tudo isso. Dados modernos têm muitas dimensões. Uma imagem de qualidade tem centenas de milhares de pixels. Um embedding de palavra pode ter centenas ou milhares de posições. E quando combinamos tudo isso em modelos grandes, chegamos rapidamente a bilhões de números. Processar tudo isso diretamente seria computacionalmente impossível."
 > "A álgebra linear resolve esse problema com técnicas de redução de dimensionalidade. A mais importante delas é a Decomposição em Valores Singulares — em inglês, Singular Value Decomposition, ou SVD."
 
@@ -424,7 +424,7 @@ A rede e a fórmula somem.
 `ReplacementTransform(group_a, decomposed)` — A se divide em U × Σ × Vᵀ  
 `Write(formula_svd)` — A = UΣVᵀ surge no topo
 
-**M:**
+**J:**
 > "O que o SVD faz, em essência, é pegar uma matriz grande e decompor em três matrizes menores. O produto dessas três matrizes aproxima a original, mas com muito menos informação. As partes mais importantes dos dados são preservadas, e o ruído é descartado. Isso permite comprimir dados, extrair padrões escondidos e construir sistemas inteligentes."
 
 ---
@@ -439,7 +439,7 @@ Matrizes somem. `Write(apps_title)` — "Aplicações do SVD"
 - Redução dimensional (PCA)
 - Embeddings compactos em NLP
 
-**M:**
+**J:**
 > "A aplicação clássica do SVD é o sistema de recomendação. Imagine uma matriz enorme: as linhas são usuários da Netflix, as colunas são filmes, e o valor em cada célula é a nota que aquele usuário deu àquele filme. Essa matriz tem dezenas de milhões de linhas e milhares de colunas, e a maior parte dela está em branco — nenhum usuário assistiu a todos os filmes."
 > "O SVD descobre padrões escondidos nessa matriz. Ele percebe que existem gêneros latentes, perfis de gosto, conexões sutis entre usuários e filmes. É assim que a Netflix recomenda algo que você nunca viu, mas que combina com o que você gosta."
 
@@ -458,7 +458,7 @@ Matrizes somem. `Write(apps_title)` — "Aplicações do SVD"
 `Write(phrase)` em sequência: **Dados** → **Matemática** → **Inteligência**  
 `FadeIn(subtitle)` — "A Álgebra Linear é a base do Machine Learning"
 
-**M:**
+**J:**
 > "E é exatamente esse conjunto de ferramentas matemáticas que está por trás de praticamente todas as tecnologias inteligentes que conhecemos hoje. Os modelos de linguagem da OpenAI são, no fundo, milhões de operações com matrizes acontecendo a cada palavra gerada. As recomendações da Netflix e as playlists do Spotify usam decomposições e similaridade vetorial. A busca do Google moderna é movida por embeddings comparados por similaridade de cosseno. Reconhecimento facial, diagnóstico médico por imagem, carros autônomos, tradutores automáticos — em todos eles, a base matemática é a mesma."
 
 ---
@@ -469,7 +469,7 @@ Matrizes somem. `Write(apps_title)` — "Aplicações do SVD"
 `FadeIn` dos 7 cards em grade (Vetores, Matrizes, Imagens, Similaridade, Transf. Lin., Redes Neurais, SVD)  
 `Flash` em cada card em sequência
 
-**M:**
+**J:**
 > "A álgebra linear é, em última análise, a linguagem que torna o aprendizado de máquina possível. Ela representa o mundo em forma de dados, organiza esses dados em estruturas computáveis, transforma essas estruturas em informação útil, e mede as relações entre tudo isso."
 > "Em uma frase: ela transforma dados em estrutura, estrutura em computação, e computação em inteligência."
 
@@ -485,7 +485,7 @@ Matrizes somem. `Write(apps_title)` — "Aplicações do SVD"
 `3` (amarelo) — "Operações matriciais executam o processamento"  
 `4` (roxo) — "Machine Learning depende diretamente dessas estruturas"
 
-**M:**
+**J:**
 > "Por isso, compreender álgebra linear não é apenas estudar uma área da matemática. É compreender os fundamentos da inteligência artificial moderna — a tecnologia que está redefinindo o século vinte e um."
 
 ---
@@ -506,7 +506,7 @@ Milena Oliveira Penhalves
 
 `FadeOut(credits)` — tela preta.
 
-**M:**
+**J:**
 > "Muito obrigado por assistirem."
 
 *(Silêncio de 3 segundos. Fade out.)*
