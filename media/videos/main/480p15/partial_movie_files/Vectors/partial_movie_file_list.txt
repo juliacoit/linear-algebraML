@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/2667235024_580885902_223132457.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_3719510091_940163130.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_4127898093_799028965.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_4090605074_3194487728.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_620566237_1118969281.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_2895101590_3919460532.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_1754310298_1725968302.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_368509385_2085499793.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_580989595_691969773.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_2704686740_317507982.mp4'
+file 'file:F:/UFG/INF - CC/2 Semestre/MD/projetovideo/linear-algebraML/media/videos/main/480p15/partial_movie_files/Vectors/3742336751_1956147703_2935478889.mp4'

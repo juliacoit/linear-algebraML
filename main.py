@@ -142,24 +142,25 @@ class Vectors(Scene):
         self.camera.background_color = BG
 
         # ── Plano cartesiano ─────────────────────────────────
+        OFFSET = DOWN * 1.2
         plane = NumberPlane(
             background_line_style={
                 "stroke_color": BLUE_E,
                 "stroke_opacity": 0.3,
             },
             axis_config={"stroke_color": GRAY_C, "stroke_opacity": 0.8},
-        )
+        ).shift(OFFSET)
         self.play(Create(plane), run_time=1.5)
 
         # ── Vetor A ──────────────────────────────────────────
-        vector_a = Vector([3, 2], color=BLUE_C, stroke_width=5)
+        vector_a = Vector([3, 2], color=BLUE_C, stroke_width=5).shift(OFFSET)
         label_a  = MathTex(r"\vec{A}", color=BLUE_C, font_size=36)
         label_a.next_to(vector_a.get_end(), UR, buff=0.15)
 
         self.play(GrowArrow(vector_a), Write(label_a))
 
         # ── Vetor B ──────────────────────────────────────────
-        vector_b = Vector([1, 4], color=GREEN_C, stroke_width=5)
+        vector_b = Vector([1, 4], color=GREEN_C, stroke_width=5).shift(OFFSET)
         label_b  = MathTex(r"\vec{B}", color=GREEN_C, font_size=36)
         label_b.next_to(vector_b.get_end(), UL, buff=0.15)
 
@@ -178,8 +179,8 @@ class Vectors(Scene):
             texts.move_to(rect)
             return VGroup(rect, texts).move_to(pos)
 
-        box_a = feature_box(["Peso:  3 kg", "Altura: 2 dm"], BLUE_C,  [-4.6, -1.6, 0])
-        box_b = feature_box(["Peso:  1 kg", "Altura: 4 dm"], GREEN_C, [ 4.6, -1.6, 0])
+        box_a = feature_box(["Peso:  3 kg", "Altura: 2 dm"], BLUE_C,  [-4.6, -2.8, 0])
+        box_b = feature_box(["Peso:  1 kg", "Altura: 4 dm"], GREEN_C, [ 4.6, -2.8, 0])
 
         self.play(FadeIn(box_a), FadeIn(box_b), run_time=0.8)
 

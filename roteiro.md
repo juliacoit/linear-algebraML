@@ -18,17 +18,17 @@
 
 ## Tabela de tempos
 
-| Apresentadora | Trecho                              | Tempo alvo    | Cena Manim                  |
-|---------------|-------------------------------------|---------------|-----------------------------|
-| Milena        | Abertura e por que álgebra linear   | ≈ 1 min 30 s  | `Intro`                     |
-| Milena        | Escalar, vetor, matriz, tensor      | ≈ 2 min 30 s  | `ScalarsAndTensors`         |
-| Giovanna      | Vetorização (imagem, texto, áudio)  | ≈ 1 min 45 s  | `ImageToMatrix` + `TextAudioVectorization` |
-| Giovanna      | Similaridade euclidiana e cosseno   | ≈ 1 min 30 s  | `SimilarityMetrics`         |
-| Giovanna      | Transformações lineares             | ≈ 1 min       | `LinearTransformationExample` |
-| Júlia         | Redes neurais e Y = WX + b          | ≈ 1 min 45 s  | `NeuralNetwork`             |
-| Júlia         | Redução de dimensionalidade (SVD)   | ≈ 1 min 15 s  | `SVDScene`                  |
-| Júlia         | Aplicações reais e conclusão        | ≈ 1 min 30 s  | `Conclusion`                |
-| **Total**     |                                     | **≈ 12 min 45 s** |                         |
+| Apresentadora | Trecho                              | Tempo alvo    | Cena Manim                  | Arquivo de vídeo                                        |
+|---------------|-------------------------------------|---------------|-----------------------------|---------------------------------------------------------|
+| Milena        | Abertura e por que álgebra linear   | ≈ 1 min 30 s  | `Intro`                     | `Intro.mp4`                                             |
+| Milena        | Escalar, vetor, matriz, tensor      | ≈ 2 min 30 s  | `ScalarsAndTensors`         | `ScalarsAndTensors.mp4`                                 |
+| Giovanna      | Vetorização (imagem, texto, áudio)  | ≈ 1 min 45 s  | `ImageToMatrix` + `TextAudioVectorization` | `ImageToMatrix.mp4` + `TextAudioVectorization.mp4` |
+| Giovanna      | Similaridade euclidiana e cosseno   | ≈ 1 min 30 s  | `SimilarityMetrics`         | `SimilarityMetrics.mp4`                                 |
+| Giovanna      | Transformações lineares             | ≈ 1 min       | `LinearTransformationExample` | `LinearTransformationExample.mp4`                     |
+| Júlia         | Redes neurais e Y = WX + b          | ≈ 1 min 45 s  | `NeuralNetwork`             | `NeuralNetwork.mp4`                                     |
+| Júlia         | Redução de dimensionalidade (SVD)   | ≈ 1 min 15 s  | `SVDScene`                  | `SVDScene.mp4`                                          |
+| Júlia         | Aplicações reais e conclusão        | ≈ 1 min 30 s  | `Conclusion`                | `Conclusion.mp4`                                        |
+| **Total**     |                                     | **≈ 12 min 45 s** |                         |                                                         |
 
 ---
 
@@ -41,6 +41,7 @@
 
 ## CENA 1 — INTRODUÇÃO
 **Classe Manim:** `Intro`  
+**Arquivo:** `Intro.mp4`  
 **Duração:** ≈ 1 min 30 s
 
 ---
@@ -128,6 +129,7 @@ Em branco, `Write`.
 
 ## CENA 2 — ESCALARES, VETORES, MATRIZES E TENSORES
 **Classe Manim:** `ScalarsAndTensors`  
+**Arquivo:** `ScalarsAndTensors.mp4`  
 **Duração:** ≈ 2 min 30 s
 
 ---
@@ -202,6 +204,7 @@ cada palavra na sua cor (ciano, azul, verde, amarelo).
 
 ## CENA 3 — VETORIZAÇÃO: IMAGEM, TEXTO, ÁUDIO
 **Classes Manim:** `ImageToMatrix` + `TextAudioVectorization`  
+**Arquivos:** `ImageToMatrix.mp4` + `TextAudioVectorization.mp4`  
 **Duração:** ≈ 1 min 45 s
 
 ---
@@ -262,6 +265,7 @@ Pipeline final: `Imagem → Pixels → Valores → Matriz → Algoritmo`
 
 ## CENA 4 — MÉTRICAS DE SIMILARIDADE
 **Classe Manim:** `SimilarityMetrics`  
+**Arquivo:** `SimilarityMetrics.mp4`  
 **Duração:** ≈ 1 min 30 s
 
 ---
@@ -312,6 +316,7 @@ Vetores somem. 3 casos surgem em sequência:
 
 ## CENA 5 — TRANSFORMAÇÕES LINEARES
 **Classe Manim:** `LinearTransformationExample`  
+**Arquivo:** `LinearTransformationExample.mp4`  
 **Duração:** ≈ 1 min
 
 ---
@@ -351,6 +356,7 @@ O vetor amarelo se move mostrando sua posição original em cinza (ghost vector)
 
 ## CENA 6 — REDES NEURAIS E Y = WX + b
 **Classe Manim:** `NeuralNetwork`  
+**Arquivo:** `NeuralNetwork.mp4`  
 **Duração:** ≈ 1 min 45 s
 
 ---
@@ -402,6 +408,7 @@ A rede e a fórmula somem.
 
 ## CENA 7 — DECOMPOSIÇÃO SVD
 **Classe Manim:** `SVDScene`  
+**Arquivo:** `SVDScene.mp4`  
 **Duração:** ≈ 1 min 15 s
 
 ---
@@ -447,6 +454,7 @@ Matrizes somem. `Write(apps_title)` — "Aplicações do SVD"
 
 ## CENA 8 — APLICAÇÕES E CONCLUSÃO
 **Classe Manim:** `Conclusion`  
+**Arquivo:** `Conclusion.mp4`  
 **Duração:** ≈ 1 min 30 s
 
 ---
