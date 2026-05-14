@@ -73,7 +73,7 @@ linear-algebraML/
 | Manim Community Edition | geração das animações |
 | MiKTeX | renderização de LaTeX (MathTex, fórmulas) |
 | FFmpeg | exportação de vídeo |
-| CapCut / DaVinci / Premiere | edição final (opcional) |
+| Sony Vegas | edição final (opcional) |
 
 ---
 
